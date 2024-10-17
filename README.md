@@ -946,3 +946,34 @@ decrypted
 
 </details>  
 
+> #### Q53: Which of the following statements are true about Vault policies? Choose two correct answers
+
+- [ ] The default policy can not be modified
+- [ ] You must use YAML to define policies
+- [ ] Policies provide a declarative way to grant or forbid access to certain paths and operations in Vault
+- [ ] Vault must be restarted in order for a policy change to take an effect
+- [ ] Policies deny by default (empty policy grants no permission)
+
+<details>
+  <summary> Answer </summary>
+
+  Vault policies are written in HCL or JSON format and are attached to tokens or roles by name. Policies define the permissions and restrictions for accessing and performing operations on certain paths and secrets in Vault. Policies are deny by default, which means that an empty policy grants no permission in the system, and any request that is not explicitly allowed by a policy is implicitly denied. Some of the features and benefits of Vault policies are: Policies are path-based, which means that they match the request path to a set of rules that specify the allowed or denied capabilities, such as create, read, update, delete, list, sudo, etc. 
+  Policies are additive, which means that if a token or a role has multiple policies attached, the effective policy is the union of all the individual policies. The most permissive capability is granted if there is a conflict. Policies can use glob patterns, such as * and +, to match multiple paths or segments with a single rule.For example, path “secret/*” matches any path starting with secret/, and path “secret/+/config” matches any path with two segments after secret/ and ending with config. Policies can use templating to interpolate certain values into the rules, such as identity information, time, randomness, etc. For example, path “secret/{{identity.entity.id}}/*” matches any path starting with secret/ followed by the entity ID of the requester. Policies can be managed by using the vault policy commands or the sys/policy API endpoints. You can write, read, list, and delete policies by using these interfaces6. The default policy is a built-in policy that is attached to all tokens by default and cannot be deleted. However, the default policy can be modified by using the vault policy  write command or the sys/policy API endpoint. The default policy provides common permissions for tokens, such as renewing themselves, looking up their own information, creating and managing response-wrapping tokens, etc7. You do not have to use YAML to define policies, as Vault supports both HCL and JSON formats. HCL is a human-friendly configuration language that is also JSON compatible, which means that JSON can be used as a valid input for policies as well8. Vault does not need to be restarted in order for a policy change to take effect, as policies are stored and evaluated in memory. Any change to a policy is immediately reflected in the system, and any token or role that has that policy attached will be affected by the change.
+
+  Reference:
+  [1](https://developer.hashicorp.com/vault/docs/concepts/policies),[2](https://developer.hashicorp.com/vault/docs/concepts/policies),[3](https://developer.hashicorp.com/vault/docs/concepts/policies),[4](https://developer.hashicorp.com/vault/docs/concepts/policies),[5](https://developer.hashicorp.com/vault/docs/concepts/policies),[6](https://developer.hashicorp.com/vault/docs/commands/lease),[7](https://developer.hashicorp.com/vault/docs/concepts/policies),[8](https://developer.hashicorp.com/vault/docs/concepts/policies),[9](https://developer.hashicorp.com/vault/docs/concepts/policies#policy-updates)
+
+</details>  
+
+> #### Q54: Use this screenshot to answer the question below:
+![alt text](secretengine.png)
+
+Where on this page would you click to view a secret located at secret/my-secret?
+<details>
+  <summary> Answer </summary>
+
+  secret/ 
+
+  In Vault's user interface, secrets are usually stored under the `secret/` path. In the screenshot provided, the path marked D is `secret/`, which matches the secret path we are looking for `secret/my-secret`. So, to see the secret located in `secret my-secret`, you should click on the D option corresponding to the `secret/` path.
+
+</details>
