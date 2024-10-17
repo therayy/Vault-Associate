@@ -977,3 +977,80 @@ Where on this page would you click to view a secret located at secret/my-secret?
   In Vault's user interface, secrets are usually stored under the `secret/` path. In the screenshot provided, the path marked D is `secret/`, which matches the secret path we are looking for `secret/my-secret`. So, to see the secret located in `secret my-secret`, you should click on the D option corresponding to the `secret/` path.
 
 </details>
+
+> #### Q55: An organization would like to use a scheduler to track & revoke access granted to a job (by Vault) at completion.What auth-associated Vault object should be tracked to enable this behavior? Where on this page would you click to view a secret located at secret/my-secret?
+
+- [ ] Token accessor
+- [ ] Token ID
+- [ ] Lease ID
+- [ ] Authentication method
+<details>
+  <summary> Answer </summary>
+
+  Lease ID
+
+  A lease ID is a unique identifier that is assigned by Vault to every dynamic secret and service type
+  authentication token. A lease ID contains information such as the secret path, the secret version, the
+  secret type, etc.
+  A lease ID can be used to track and revoke access granted to a job by Vault at completion, as it allows
+  the scheduler to perform the following operations:
+  Lookup the lease information by using the vault lease lookup command or the sys/leases/lookup API
+  endpoint. This will return the metadata of the lease, such as the expire time, the issue time, the
+  renewable status, and the TTL.
+  Renew the lease if needed by using the vault lease renew command or the sys/leases/renew API
+  endpoint. This will extend the validity of the secret or the token for a specified increment, or reset the TTL
+  to the original value if no increment is given.
+  Revoke the lease when the job is completed by using the vault lease revoke command or the
+  sys/leases/revoke API endpoint. This will invalidate the secret or the token immediately and prevent any
+  further renewals. For example, with the AWS secrets engine, the access keys will be deleted from AWS
+  the moment a lease is revoked.
+  A lease ID is different from a token ID or a token accessor. A token ID is the actual value of the token that
+  is used to authenticate to Vault and perform requests. A token ID should be treated as a secret and
+  protected from unauthorized access. A token accessor is a secondary identifier of the token that is used
+  for token management without revealing the token ID. A token accessor can be used to lookup, renew, or
+  revoke a token, but not to authenticate to Vault or access secrets. A token ID or a token accessor can be
+  used to revoke the token itself, but not the leases associated with the token. To revoke the leases, a
+  lease ID is required.
+  An authentication method is a way to verify the identity of a user or a machine and issue a token with
+  appropriate policies and metadata. An authentication method is not an object that can be tracked or
+  revoked, but a configuration that can be enabled, disabled, tuned, or customized by using the vault auth
+  commands or the sys/auth API endpoints.
+  Reference:
+  [1](https://developer.hashicorp.com/vault/docs/commands/lease/lookup),[2](https://developer.hashicorp.com/vault/docs/commands/lease/renew),[3](https://developer.hashicorp.com/vault/docs/commands/lease/revoke),[4](https://developer.hashicorp.com/vault/docs/concepts/tokens#token-accessors),[5](https://developer.hashicorp.com/vault/docs/concepts/auth)
+
+</details>
+
+> #### Q56: Which statement describes the results of this command: `$ vault secrets enable transit`
+
+- [ ] Enables the transit secrets engine at transit path
+- [ ] Requires a root token to execute the command successfully
+- [ ] Enables the transit secrets engine at secret path
+- [ ] Fails due to missing -path parameter
+- [ ] Fails because the transit secrets engine is enabled by default
+
+<details>
+  <summary> Answer </summary>
+
+  Enables the transit secrets engine at transit path
+
+  The command vault secrets enable transit enables the transit secrets engine at the transit path. The transit secrets engine is a secrets engine that handles cryptographic functions on data in-transit, such as encryption, decryption, signing, verification, hashing, and random bytes generation. The transit secrets engine does not store the data sent to it, but only performs the requested operations and returns the results. The transit secrets engine can also be viewed as “cryptography as a service” or “encryption as a service”. The command vault secrets enable transit uses the default path of transit for the secrets engine, but this can be changed by using the -path option. For example, vault secrets enable -path=mytransit transit would enable the transit secrets engine at the my-transit path.
+
+  Reference: Transit - Secrets Engines | Vault | HashiCorp Developer, vault secrets enable - Command | Vault | HashiCorp Developer
+
+</details>
+
+> #### Q57: Running the second command in the GUI CLI will succeed.
+![alt text](vaultcli.png)
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+
+  False
+
+  Running the second command in the GUI CLI will fail. The second command is `vault kv put secret/creds passcode=my-long-passcode`. This command attempts to write a secret named creds with the `value passcode=my-long-passcode` to the secret path, which is the default path for the kv secrets engine. However, the kv secrets engine is not enabled at the secret path, as shown by the first command vault secrets list, which lists the enabled secrets engines and their paths. The only enabled secrets engine is the transit secrets engine at the transit path. Therefore, the second command will fail with an error message saying that no secrets engine is mounted at the path `secret/`. To make the second command succeed, the kv secrets engine must be enabled at the secret path or another path, using the vault secrets enable command. For example, `vault secrets enable - path=secret` kv would enable the kv secrets engine at the secret path.
+
+  Reference: kv - Command | Vault | HashiCorp Developer, vault secrets enable - Command | Vault | HashiCorp Developer
+
+</details>
