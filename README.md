@@ -71,5 +71,54 @@
 <details>
   <summary> Answer </summary>
   
-  `vault token lookup` 
+  `vault token lookup` The Vault CLI command to query information about the token the client is currently using is vault token lookup. This command displays information about the token or accessor provided as an argument, or the locally authenticated token if no argument is given. The information includes the token ID, accessor, policies, TTL, creation time, and metadata. This command can be useful for debugging and auditing purposes, as well as for renewing or revoking tokens.
+
+Reference: token lookup - Command | Vault | HashiCorp Developer, Tokens | Vault | HashiCorp Developer
 </details>
+
+> #### Q7: Which of the following is a machine-oriented Vault authentication backend?
+
+- [ ] Okta
+- [ ] AppRole
+- [ ] Transit
+- [ ] GitHub
+<details>
+  <summary> Answer </summary>
+  
+  AppRole is a machine-oriented authentication method that allows machines or applications to authenticate with Vault using a role ID and a secret ID. The role ID is a unique identifier for the application, and the secret ID is a single-use credential that can be delivered to the application securely. AppRole is designed to provide secure introduction of machines and applications to Vault, and to support the principle of least privilege by allowing fine-grained access control policies to be attached to each role. Okta, GitHub, and Transit are not machine-oriented authentication methods. Okta and GitHub are useroriented authentication methods that allow users to authenticate with Vault using their Okta or GitHub credentials. Transit is not an authentication method at all, but a secrets engine that provides encryption as a service.
+
+Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | Vault | HashiCorp Developer GitHub Auth Method | Vault | HashiCorp Developer Transit Secrets Engine | Vault | HashiCorp Developer
+</details>
+
+> #### Q8: Security requirments demand that no secrets appear in the shell history. Which command does not meet this requirment?
+
+- [ ] `generate-password | vault kv put secret/password value`
+- [ ] `vault kv put secret/password value-itsasecret`
+- [ ] `vault kv put secret/password value=@data.txt`
+- [ ] `vault kv put secret/password value-SSECRET_VALUE`
+<details>
+  <summary> Answer </summary>
+ 
+  `vault kv put secret/password value-itsasecret`
+   This command would store the secret value `itsasecret` in the `key/value` secrets engine at the path `secret/password`, but it would also expose the secret value in the shell history, which could be accessed by other users or malicious actors. This is not a secure way of storing secrets in Vault. The other commands are more secure ways of storing secrets in Vault without revealing them in the shell history.
+
+
+
+</details>
+
+> #### Q9: You can build a high availability Vault cluster with any storage backend.
+
+- [ ] True
+- [ ] False
+<details>
+  <summary> Answer </summary>
+ 
+  False
+   Not all storage backends support high availability mode for Vault. Only the storage backends that support locking can enable Vault to run in a multi-server mode where one server is active and the others are standby. Some examples of storage backends that support high availability mode are Consul, Integrated Storage, and ZooKeeper. Some examples of storage backends that do not support high availability mode are Filesystem, MySQL, and PostgreSQL.
+  
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/ha1,
+  https://developer.hashicorp.com/vault/docs/configuration/storage2
+   
+</details>
+
