@@ -571,3 +571,58 @@ path "secret/metadata/{{identity.entity.id}}/*" {
   This policy uses templated paths that allow each user to access the corresponding `key-value` store (KV) path based on their entity ID, a unique identifier within a vault. What's in the policy is a variable that will be replaced with the actual ID of the entity at runtime, so each user can only access the path that matches their entity `ID.{{identity.entity.id}}` The first part of the policy allows users to `create`, `update`, `read`, and `delete` in their personal KV path. The second part of the policy allows users to list the metadata information associated with their entity ID under the path. `secret/metadata/`
 
 </details>
+
+> #### Q36: To make an authenticated request via the Vault HTTP API, which header would you use?
+
+- [ ] The X-Vault-Token HTTP Header
+- [ ] The x-Vault-Request HTTP Header
+- [ ] The Content-Type HTTP Header
+- [ ] The X-Vault-Namespace HTTP Header
+
+<details>
+  <summary> Answer </summary>
+
+  The X-Vault-Token HTTP Header
+  To make an authenticated request via the Vault HTTP API, you need to use the `X-Vault-Token` HTTP Header or the Authorization HTTP Header using the Bearer <token> scheme. The token is a string that represents your identity and permissions in Vault. You can obtain a token by using an authentication method, such as userpass, Approle, aws, etc. The token can also be a root token, which has unlimited access to Vault, or a wrapped token, which is a response-wrapping token that can be used to unwrap the actual token. The token must be sent with every request to Vault that requires authentication, except for the unauthenticated endpoints, such as `sys/init`, `sys/seal-status`, `sys/unseal`, etc. The token is used by Vault to verify your identity and enforce the policies that grant or deny access to various paths and operations.
+  
+  Reference:
+  https://developer.hashicorp.com/vault/api-docs3,
+  https://developer.hashicorp.com/vault/docs/concepts/tokens4,
+  https://developer.hashicorp.com/vault/docs/concepts/auth5
+
+</details>
+
+> #### Q37: Which of the following are replication methods available in Vault Enterprise? Choose two correct answers.
+
+- [ ] Cluster sharding
+- [ ] Namespaces
+- [ ] Performance Replication
+- [ ] Disaster Recovery Replication
+
+<details>
+  <summary> Answer </summary>
+
+  Performance Replication and Disaster Recovery Replication
+
+  The replication methods available in Vault Enterprise are performance replication and disaster recovery replication. These methods allow critical data to be replicated across clusters to support horizontally scaling and disaster recovery workloads. Performance replication enables a primary cluster to replicate data to one or more secondary clusters, which can handle client requests and improve performance and availability. Performance replication replicates most Vault data, such as secrets, policies, auth methods, and leases, but not tokens. Performance secondaries generate their own tokens and leases, which are not replicated back to the primary. Performance replication also supports filtering, which allows selective replication of data based on namespaces or paths. Disaster recovery replication enables a primary cluster to replicate data to one or more secondary clusters, which act as standby clusters in case of a failure or outage of the primary. Disaster recovery replication replicates all Vault data, including tokens and leases, and maintains the same configuration and state as the primary. Disaster recovery secondaries do not handle client requests, but they can be promoted to a primary in a disaster recovery scenario.
+
+  Reference: Replication - Vault Enterprise | Vault | HashiCorp Developer, Performance Replication - Vault Enterprise | Vault | HashiCorp Developer, Disaster Recovery Replication - Vault Enterprise | Vault | HashiCorp Developer
+
+</details>
+
+> #### Q38: Use this screenshot to answer the question below:
+![alt text](gui.png)
+When are you shown these options in the GUI?
+- [ ] Enabling policies
+- [ ] Enabling authentication engines
+- [ ] Enabling secret engines
+- [ ] Enabling authentication methods
+
+<details>
+  <summary> Answer </summary>
+
+  Enabling secret engines
+
+  In the GUI, these options are displayed when different types of secret engines are enabled in the Vault.The Secret Engine is the component of the Vault that is used to store, generate, and manage access to different types of secrets. For example, KV stores secret data, PKI generates TLS certificates, and the database engine generates dynamic database credentials, etc.
+
+</details>
