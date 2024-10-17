@@ -51,8 +51,8 @@
 > #### Q5: How would you describe the value of using the Vault Transit secrets engine?
 - [ ] Vault has an API that can be programmatically consumed by applications
 - [ ] The transit secrets engine ensures encryption in-transit and at-rest is enforced enterprise wide
-- [ ]Encryption for application data is best handled by a storage system or database engine, while storing encryption keys in Vault
-- [ ]The transit secrets engine relieves the burden of proper encryption/decryption from application developers and pushes the burden onto the operators of Vault
+- [ ] Encryption for application data is best handled by a storage system or database engine, while storing encryption keys in Vault
+- [ ] The transit secrets engine relieves the burden of proper encryption/decryption from application developers and pushes the burden onto the operators of Vault
 <details>
   <summary> Answer </summary>
   
@@ -122,3 +122,29 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
    
 </details>
 
+> #### Q10: What command creates a secret with the `my-password` and the value `53cr3t` at path `my-secrets` within `KV` secrets engine mounted at `secret`
+
+- [ ] `vault kv put secret/my-secrets/my-password 53cr3t`
+- [ ] `vault kv write secret/my-secrets/my-password 53cr3t`
+- [ ] `vault kv write 53cr3t my-secrets/my-password`
+- [ ] `vault kv put secret/my-secrets »y-password-53cr3t`
+<details>
+  <summary> Answer </summary>
+  
+  `vault kv put secret/my-secrets/my-password 53cr3t`
+   or `vault kv put secret/my-secrets my-password=53cr3t`
+
+   Reference: https://developer.hashicorp.com/vault/docs/commands/kv/put3,
+              https://developer.hashicorp.com/vault/docs/commands/kv4
+</details>
+
+> #### Q11: What can be used to limit the scope of a credential breach?
+- [ ] Storage of secrets in a distributed ledger
+- [ ] Enable audit logging 
+- [ ] Use of a short-lived dynamic secrets
+- [ ] Sharing credentials between applications
+<details>
+  <summary> Answer </summary>
+  
+  Use of a short-lived dynamic secrets
+</details>
