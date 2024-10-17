@@ -763,3 +763,74 @@ Which Vault command will revoke the lease and remove the credential from AWS?
   Reference: lease revoke - Command | Vault | HashiCorp Developer
 
 </details>
+
+> #### Q44: When an auth method is disabled all users authenticated via that method lose access.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+
+  True
+
+  The statement is true. When an auth method is disabled, all users authenticated via that method lose access. This is because the tokens issued by the auth method are automatically revoked when the auth method is disabled. This prevents the users from performing any operation in Vault using the revoked tokens. To regain access, the users have to authenticate again using a different auth method that is enabled and has the appropriate policies attached.
+
+  Reference: Auth Methods | Vault | HashiCorp Developer, auth disable - Command | Vault | HashiCorp Developer
+
+</details>
+
+> #### Q45: A user issues the following cURL command to encrypt data using the transit engine and the Vault AP:
+
+```bash
+curl \ 
+--header "X-Vault-Token: c4f280f6-fdb2-18eb-89d3-589e2e834cdb" \ 
+--request POST \<
+--data @payload.json \ 
+http://127.0.0.1:8200/v1/transit/encrypt/my-key
+
+```
+Which payload.json file has the correct contents?
+
+- [ ] 
+  ```yaml
+  {
+    "plaintext": "dGh1IHF1aWNrIGJyb3duIGZveA=="
+  }
+  ```
+- [ ] 
+  ```yaml
+   {
+     "ciphertext": "vault:v1:abcdefgh"
+   }
+  ```
+- [ ] 
+  ```yaml
+  { 
+    "data": {
+      "plaintext" : "dGh1IHF1aWNrIGJyb3duIGZveA=="
+    } 
+  }
+  ```
+- [ ] 
+  ```yaml
+    { 
+    "data": {
+      "ciphertext": "vault:v1:abcdefgh"
+    } 
+  }
+  ```
+<details>
+  <summary> Answer </summary>
+
+  ```yaml
+   {
+     "ciphertext": "vault:v1:abcdefgh"
+   }
+  ```
+
+  This file should contain a field whose value is the Base64-encoded string of the data to be encrypted. In a given cURL command, the user is requesting that Vault's Transit secret engine encrypt data with the specified key, so the correct payload should contain only plaintext data so that the Transit secret engine can encrypt the operation. Option B contains the field and Base64-encoded data, which conforms to the request format expected by the Transit secret engine. plaintext
+
+  Reference: Auth Methods | Vault | HashiCorp Developer, auth disable - Command | Vault | HashiCorp Developer
+
+</details>
