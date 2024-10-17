@@ -308,8 +308,7 @@ it becomes invalid.
   <summary> Answer </summary>
 
   ```
-  path "secret/bar/*" 
-  {
+  path "secret/bar/*" {
   capabilities = ["read","list"]
   }
   ```
