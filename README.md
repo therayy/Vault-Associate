@@ -834,3 +834,96 @@ Which payload.json file has the correct contents?
   Reference: Auth Methods | Vault | HashiCorp Developer, auth disable - Command | Vault | HashiCorp Developer
 
 </details>
+
+> #### Q47: A web application uses Vault's transit secrets engine to encrypt data in-transit. If an attacker intercepts the data in transit which of the following statements are true? Choose two correct answers.
+
+- [ ] You can rotate the encryption key so that the attacker won’t be able to decrypt the data
+- [ ] The keys can be rotated and min_decryption_version moved forward to ensure this data cannot be
+decrypted
+- [ ] The Vault administrator would need to seal the Vault server immediately
+- [ ] Even if the attacker was able to access the raw data, they would only have encrypted bits (TLS in transit)
+
+<details>
+  <summary> Answer </summary>
+
+  You can rotate the encryption key so that the attacker won’t be able to decrypt the data & Even if the attacker was able to access the raw data, they would only have encrypted bits (TLS in transit)
+
+  You can rotate the encryption key so that the attacker won't be able to decrypt the data. If an attacker intercepts the data, but does not have the key, they will not be able to decrypt it. Rotating keys is a security measure that can be used when the key may have been compromised, ensuring that even if the data is intercepted, future encrypted data is not at risk. Even if the attacker was able to access the raw data, they would only have encrypted bits (TLS in transit). This is correct because if the data is encrypted during transmission, the attacker will only intercept the encrypted data..
+
+</details>  
+
+> #### Q48: The Vault encryption key is stored in Vault's backend storage.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+
+  False
+
+  The statement is false. The Vault encryption key is not stored in Vault’s backend storage, but rather in Vault’s memory. The Vault encryption key is the key that is used to encrypt and decrypt the data that is stored in Vault’s backend storage, such as secrets, tokens, policies, etc. The Vault encryption key is derived from the master key, which is generated when Vault is initialized. The master key is split into unseal keys using Shamir’s secret sharing algorithm, and the unseal keys are distributed to trusted operators. To start Vault, a quorum of unseal keys is required to reconstruct the master key and derive the encryption key. The encryption key is then kept in memory and used to protect the data in Vault’s backend storage. The encryption key is never written to disk or exposed via the API.
+
+  Reference: Seal/Unseal | Vault | HashiCorp Developer, Key Rotation | Vault | HashiCorp Developer
+
+</details>  
+
+> #### Q49: Which of the following statements describe the secrets engine in Vault? Choose three correct answers.
+
+- [ ] Some secrets engines simply store and read data
+- [ ] Once enabled, you cannot disable the secrets engine
+- [ ] You can build your own custom secrets engine
+- [ ] Each secrets engine is isolated to its path
+- [ ] A secrets engine cannot be enabled at multiple paths
+
+<details>
+  <summary> Answer </summary>
+
+  Some secrets engines simply store and read data
+  & You can build your own custom secrets engine 
+  & Each secrets engine is isolated to its path
+
+  Secrets engines are components that store, generate, or encrypt data in Vault. They are enabled at aspecific path in Vault and have their own API and configuration. Some of the statements that describe the secrets engines in Vault are: Some secrets engines simply store and read data, such as the key/value secrets engine, which acts like an encrypted Redis or Memcached. Other secrets engines perform more complex operations, such as generating dynamic credentials, encrypting data, issuing certificates, etc. You can build your own custom secrets engine by using the plugin system, which allows you to write and run your own secrets engine as a separate process that communicates with Vault over gRPC. You can also use the SDK to create your own secrets engine in Go and compile it into Vault.
+  Each secrets engine is isolated to its path, which means that the secrets engine cannot access or interact with other secrets engines or data outside its path. The path where the secrets engine is enabled can be customized and can have multiple segments. For example, you can enable the AWS secrets engine at aws/ or aws/prod/ or aws/dev/3. The statements that are not true about the secrets engines in Vault are: You can disable an existing secrets engine by using the vault secrets disable command or the sys/mounts API endpoint. When a secrets engine is disabled, all of its secrets are revoked and all of its data is deleted from the storage backend4. A secrets engine can be enabled at multiple paths, with a few exceptions, such as the system and identity secrets engines. Each secrets engine enabled at a different path is independent and isolated from others. For example, you can enable the KV secrets engine at kv/ and secret/ and they will not share any data.
+  
+  Reference:
+  [1](https://developer.hashicorp.com/vault/docs/secrets),[2](https://developer.hashicorp.com/vault/docs/secrets),[3](https://developer.hashicorp.com/vault/docs/secrets),[4](https://developer.hashicorp.com/vault/docs/secrets)
+
+</details>  
+
+> #### Q50: What is a benefit of response wrapping?
+
+- [ ] Log every use of a secret
+- [ ] Load balanc secret generation across a Vault cluster
+- [ ] Provide error recovery to a secret so it is not corrupted in transit
+- [ ] Ensure that only a single party can ever unwrap the token and see what's inside
+
+<details>
+  <summary> Answer </summary>
+
+  Ensure that only a single party can ever unwrap the token and see what's inside
+
+  Response wrapping is a feature that allows Vault to take the response it would have sent to a client and instead insert it into the cubbyhole of a single-use token, returning that token instead. The client can then unwrap the token and retrieve the original response. Response wrapping has several benefits, such as providing cover, malfeasance detection, and lifetime limitation for the secret data. One of the benefits is to ensure that only a single party can ever unwrap the token and see what’s inside, as the token can be used only once and cannot be unwrapped by anyone else, even the root user or the creator of the token. This provides a way to securely distribute secrets to the intended recipients and detect any tampering or interception along the way. The other options are not benefits of response wrapping: Log every use of a secret: Response wrapping does not log every use of a secret, as the secret is not directly exposed to the client or the network. However, Vault does log the creation and deletion of the response-wrapping token, and the client can use the audit device to log the unwrapping operation. Load balance secret generation across a Vault cluster: Response wrapping does not load balance secret generation across a Vault cluster, as the secret is generated by the Vault server that receives the request and the response-wrapping token is bound to that server. However, Vault does support high availability and replication modes that can distribute the load and improve the performance of the cluster7. Provide error recovery to a secret so it is not corrupted in transit: Response wrapping does not provide error recovery to a secret so it is not corrupted in transit, as the secret is encrypted and stored in the cubbyhole of the token and cannot be modified or corrupted by anyone. However, if the token is lost or expired, the secret cannot be recovered either, so the client should have a backup or retry mechanism to handle such cases.
+
+  Reference:
+  [5](https://developer.hashicorp.com/vault/docs/concepts/response-wrapping), [6](https://developer.hashicorp.com/vault/docs/secrets), [7](https://developer.hashicorp.com/vault/docs/secrets), [8](https://developer.hashicorp.com/vault/tutorials/secrets-management/cubbyhole-response-wrapping)
+
+</details>  
+
+> #### Q51: Which of the following describes the Vault's auth method component?
+
+- [ ] It verifies a client against an internal or external system, and generates a token with the appropriate policies attached
+- [ ] It verifies a client against an internal or external system, and generates a token with root policy
+- [ ] It is responsible for durable storage of client tokens
+- [ ] It dynamically generates a unique set of secrets with appropriate permissions attached
+
+<details>
+  <summary> Answer </summary>
+
+  It verifies a client against an internal or external system, and generates a token with the appropriate policies attached
+
+  The Vault’s auth method component is the component that performs authentication and assigns identity and policies to a client. It verifies a client against an internal or external system, and generates a token with the appropriate policies attached. The token can then be used to access the secrets and resources that are authorized by the policies. Vault supports various auth methods, such as userpass, ldap, aws, kubernetes, etc., that can integrate with different identity providers and systems. The auth method component can also handle token renewal and revocation, as well as identity grouping and aliasing.
+
+  Reference: Auth Methods | Vault | HashiCorp Developer, Authentication - Concepts | Vault | HashiCorp Developer
+
+</details>  
