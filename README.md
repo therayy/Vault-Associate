@@ -660,3 +660,33 @@ Which of the following statements describe the command and its output?
   This command is a command to log in using the AppRole authentication method. In this example, and is used to request a Vault token. The output shows the various properties of the generated token, including the token itself, the policy of the token, and other metadata for the token. role_idsecret_id
 
 </details>   
+
+> #### Q40: The key/value v2 secrets engine is enabled at secret/ See the following policy:
+```yaml
+path "secret/data/*"{
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
+
+path "secret/data/super-secret"{
+  capabilities = ["deny"]
+}
+```
+
+Which of the following operations are permitted by this policy? Choose two correct answers.
+- [ ] `vault kv get secret/webapp1`
+- [ ] `vault kv put secret/webapp1 apikey-"ABCDEFGHI] K123M"`
+- [ ] `vault kv metadata get secret/webapp1`
+- [ ] `vault kv delete secret/super-secret`
+- [ ] `vault kv list secret/super-secret`
+
+<details>
+  <summary> Answer </summary>
+
+  `vault kv get secret/webapp1` & `vault kv put secret/webapp1 apikey-"ABCDEFGHI] K123M"`
+
+  The first part authorizes the `create`, `read`, `update`, `delete`, and `list` operations on all `key/value` pairs under the `path.secret/data/*`
+The second part explicitly denies all operations on the `path.secret/data/super-secret` Therefore, the following actions are allowed:
+- This command is used to obtain the secret, which is allowed. `vault kv get secret/webapp1secret/webapp1`
+- This command is used to create or update a secret under the path, which is also allowed. `vault kv put secret/webapp1 apikey="ABCDEFGHIJK123M"secret/webapp1`
+
+</details>   
