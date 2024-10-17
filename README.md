@@ -1,4 +1,4 @@
-# Vault-Associate
+# Vault Associate 002
 ---
 > #### Q1: You are using the Vault userpass auth method mounted at auth/userpass.How do you create a new user named "sally" with password "h0wN0wB4r0wnC0w"? This new user will need the power-users policy.
 - [ ] `vault put auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
