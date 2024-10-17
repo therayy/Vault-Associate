@@ -422,3 +422,65 @@ This policy will allow the user to read all the secrets in the read path and lis
   Reference: Caching - Vault Agent | Vault | HashiCorp Developer, Vault Agent Persistent Caching | Vault | HashiCorp Developer
 
 </details>
+
+> #### Q27: Your organization has an initiative to reduce and ultimately remove the use of long lived X.509 certificates. Which secrets engine will best support this use case?
+
+- [ ] PKI
+- [ ] Key/Value secrets engine version 2, with TTL defined
+- [ ] Cloud KMS
+- [ ] Transit
+<details>
+  <summary> Answer </summary>
+
+  PKI
+  The PKI secrets engine is designed to support the use case of reducing and ultimately removing the use of long lived X.509 certificates. The PKI secrets engine can generate dynamic X.509 certificates on demand, with short time-to-live (TTL) and automatic revocation. This eliminates the need for manual processes of generating, signing, and rotating certificates, and reduces the risk of certificate compromise or misuse. The PKI secrets engine can also act as a certificate authority (CA) or an intermediate CA, and can integrate with external CAs or CRLs. The PKI secrets engine can issue certificates for various purposes, such as TLS, SSH, code signing, email encryption, etc.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/secrets/pki1,
+  https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-dynamic-secrets
+</details>
+
+> #### Q28: When unsealing Vault, each Shamir unseal key should be entered
+- [ ] Sequentially from one system that all of the administrators are in front of
+- [ ] By different administrators each connecting from different computers
+- [ ] While encrypted with each administrators PGP key
+- [ ] At the command line in one single command
+<details>
+  <summary> Answer </summary>
+
+  By different administrators each connecting from different computers.
+  When unsealing Vault, each Shamir unseal key should be entered by different administrators each connecting from different computers. This is because the Shamir unseal keys are split into shares that are distributed to trusted operators, and no single operator should have access to more than one share. This way, the unseal process requires the cooperation of a quorum of key holders, and enhances the security and availability of Vault. The unseal keys can be entered via multiple mechanisms from multiple client machines, and the process is stateful. The order of the keys does not matter, as long as the threshold number of keys is reached. The unseal keys should not be entered at the command line in one single command, as this would expose them to the history and compromise the security. The unseal keys should not be encrypted with each administrator’s PGP key, as this would prevent Vault from decrypting them and reconstructing the master key.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/seal3,
+  https://developer.hashicorp.com/vault/docs/commands/operator/unseal
+</details>
+
+> #### Q29: As a best practice, the root token should be stored in which of the following ways?
+- [ ] Should be revoked and never stored after initial setup
+- [ ] Should be stored in configuration automation tooling
+- [ ] Should be stored in another password safe
+- [ ] Should be stored in Vault
+<details>
+  <summary> Answer </summary>
+
+  Should be revoked and never stored after initial setup
+  The root token is the initial token created when initializing Vault. It has unlimited privileges and can perform any operation in Vault. As a best practice, the root token should be revoked and never stored after initial setup. This is because the root token is a single point of failure and a potential security risk if it is compromised or leaked. Instead of using the root token, Vault operators should create other tokens with appropriate policies and roles that allow them to perform their tasks. If a new root token is needed in an emergency, the `vault operator generate-root` command can be used to create one on-the-fly with the consent of a quorum of unseal key holders.
+  
+  Reference: Tokens | Vault | HashiCorp Developer, Generate root tokens using unseal keys | Vault | HashiCorp Developer
+</details>
+
+> #### Q30: When creating a policy, an error was thrown:
+![alt text](aclpolicy.png)
+Which statement describes the fix for this issue?
+- [ ] Replace write with create in the capabilities list
+- [ ] You cannot have a wildcard (" • ") in the path
+- [ ] sudo is not a capability
+<details>
+  <summary> Answer </summary>
+
+  Replace write with create in the capabilities list
+  The error was thrown because the policy code contains an invalid capability, “write”. The valid capabilities for a policy are “create”, “read”, “update”, “delete”, “list”, and “sudo”. The “write” capability is not recognized by Vault and should be replaced with “create”, which allows creating new secrets or overwriting existing ones. The other statements are not correct, because the wildcard (*) and the sudo capability are both valid in a policy. The wildcard matches any number of characterswithin a path segment, and the sudo capability allows performing certain operations that require root privileges.
+
+  Reference: [Policy Syntax | Vault | HashiCorp Developer] [Policy Syntax | Vault | HashiCorp Developer]
+</details>
