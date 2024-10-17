@@ -644,7 +644,7 @@ secret_id="31d52faa-5b0b-711d-2ea2=c197cff6081b"Key Value
   | identity_policies | [] |
   | policies | ["shipping"] |
   | token_meta_role_name | shipping |
-  | --- | --- |
+---
   
 Which of the following statements describe the command and its output?
 - [ ] Missing a default token policy
@@ -690,3 +690,76 @@ The second part explicitly denies all operations on the `path.secret/data/super-
 - This command is used to create or update a secret under the path, which is also allowed. `vault kv put secret/webapp1 apikey="ABCDEFGHIJK123M"secret/webapp1`
 
 </details>   
+
+> #### Q41: You are performing a high number of authentications in a short amount of time. You're experiencing slow throughput for token generation. How would you solve this problem?
+
+- [ ] Increase the time-to-live on service tokens
+- [ ] Implement batch tokens
+- [ ] Establish a rate limit quota
+- [ ] Reduce the number of policies attached to the tokens
+
+<details>
+  <summary> Answer </summary>
+
+  Implement batch tokens
+
+  Batch tokens are a type of tokens that are not persisted in Vault’s storage backend, but are encrypted blobs that carry enough information to perform Vault actions. Batch tokens are extremely lightweight and scalable, and can improve the throughput for token generation. Batch tokens are suitable for highvolume and ephemeral workloads, such as containers or serverless functions, that require short-lived and non-renewable tokens. Batch tokens can be created by using the -type=batch flag in the vault token create command, or by configuring the token_type parameter in the auth method’s role or mount options.Batch tokens have some limitations compared to service tokens, such as the lack of renewal, revocation, listing, accessor, and cubbyhole features. Therefore, batch tokens should be used with caution and only when the trade-offs are acceptable.
+
+  Reference:
+  https://developer.hashicorp.com/vault/tutorials/tokens/batch-tokens1,
+  https://developer.hashicorp.com/vault/docs/commands/token/create2,
+  https://developer.hashicorp.com/vault/docs/concepts/tokens#token-types3
+
+</details>
+
+> #### Q42: When looking at Vault token details, which key helps you find the paths the token is able to access?
+
+- [ ] Meta
+- [ ] Path
+- [ ] Policies
+- [ ] Accessor
+
+<details>
+  <summary> Answer </summary>
+
+  Policies
+
+  When looking at Vault token details, the policies key helps you find the paths the token is able to access. Policies are a declarative way to grant or forbid access to certain paths and operations in Vault. Policies are written in HCL or JSON and are attached to tokens by name. Policies are deny by default, so an empty policy grants no permission in the system. A token can have one or more policies associated with it, and the effective policy is the union of all the individual policies. You can view the token details by using the vault token lookup command or the auth/token/lookup API endpoint. The output will show the policies key with a list of policy names that are attached to the token. You can also view the contents of a policy by using the vault policy read command or the sys/policy API endpoint. The output will show the rules key with the HCL or JSON representation of the policy. The rules will specify the paths and the capabilities (such as create, read, update, delete, list, etc.) that the policy allows or denies.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/policies4,
+  https://developer.hashicorp.com/vault/docs/commands/token/lookup5,
+  https://developer.hashicorp.com/vault/api-docs/auth/token#lookup-a-token6,
+  https://developer.hashicorp.com/vault/docs/commands/policy/read7,
+  https://developer.hashicorp.com/vault/api-docs/system/policy8
+
+</details>
+
+> #### Q43: A developer mistakenly committed code that contained AWS S3 credentials into a public repository. You have been tasked with revoking the AWS S3 credential that was in the code. This credential was created using Vault's AWS secrets engine and the developer received the following output when requesting a credential from Vault.
+
+  |  Key | Value |
+  | --- | --- |
+  | lease_id | aws/creds/s3-access/f3e92392-7d9c-09c8-c921-575d62fe80d8 | 
+  | lease_duration | 768h |
+  | lease_renewable | true |
+  | access_key | AKIAOWQXTLW36DV7IEA |
+  | Secret_key | iASuXNKcWKFtbO8Ef0vOcgtiL6knR20EJKJTH8WI |
+  ---
+
+Which Vault command will revoke the lease and remove the credential from AWS?
+
+- [ ] vault lease revoke aws/creds/s3-access/f3e92392-7d9c-99c8-c921-57Sd62fe89d8
+- [ ] vault lease revoke AKIAI0WQXTLW36DV7IEA
+- [ ] vault lease revoke f3e92392-7d9c-O9c8-c921-575d62fe80d8
+- [ ] vault lease revoke access_key-AKIAI0WQXTLW36DV7IEA
+
+<details>
+  <summary> Answer </summary>
+
+  vault lease revoke aws/creds/s3-access/f3e92392-7d9c-99c8-c921-57Sd62fe89d8
+
+  The correct answer is A because the lease ID is the unique identifier for the credential. The lease ID is used to revoke the credential using the vault lease revoke command. This command will invalidate the credential immediately and prevent any further renewals. It will also delete the access key and secret key from AWS, rendering them useless1. The access key and secret key are not sufficient to revoke the credential, as they are not recognized by Vault. The lease ID is composed of the path of the secrets engine, the role name, and a random UUID. In this case, the path is aws/creds, the role name is s3- access, and the UUID is f3e92392-7d9c-99c8-c921-57Sd62fe89d8.
+
+  Reference: lease revoke - Command | Vault | HashiCorp Developer
+
+</details>
