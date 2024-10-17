@@ -612,6 +612,7 @@ path "secret/metadata/{{identity.entity.id}}/*" {
 
 > #### Q38: Use this screenshot to answer the question below:
 ![alt text](gui.png)
+
 When are you shown these options in the GUI?
 - [ ] Enabling policies
 - [ ] Enabling authentication engines
