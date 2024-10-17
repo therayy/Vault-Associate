@@ -391,19 +391,34 @@ This policy will allow the user to read all the secrets in the read path and lis
 
 </details>
 
-> #### Q25: Which of the following describes usage of an identity group?
+> #### Q25: Vault supports which type of configuration for source limited token?
 
-- [ ] Limit the policies that would otherwise apply to an entity in the group
-- [ ] When they want to revoke the credentials for a whole set of entities simultaneously
-- [ ] Audit token usage
-- [ ] Consistently apply the same set of policies to a collection of entities
+- [ ] Cloud-bound tokens
+- [ ] Domain-bound tokens
+- [ ] CIDR-bound tokens
+- [ ] Certificate-bound tokens
 <details>
   <summary> Answer </summary>
 
-  Consistently apply the same set of policies to a collection of entities.
-  An identity group is a collection of entities that share some common attributes. An identity group can have one or more policies attached to it, which are inherited by all the members of the group. An identity group can also have subgroups, which can further refine the policies and attributes for a subset of entities. 
-  One of the use cases of an identity group is to consistently apply the same set of policies to a collection of entities. For example, an organization may have different teams or departments, such as engineering, sales, or marketing. Each team may have its own identity group, with policies that grant access to the secrets and resources that are relevant to their work. By creating an identity group for each team, the organization can ensure that the entities belonging to each team have the same level of access and permissions, regardless of which authentication method they use to log in to Vault.
+  CIDR-bound tokens
+  Vault supports CIDR-bound tokens, which are tokens that can only be used from a specific set of IP addresses or network ranges. This is a way to limit the scope and exposure of a token in case it is compromised or leaked. CIDR-bound tokens can be created by specifying the `bound_cidr_list` parameter when creating or updating a token role, or by using the `-bound-cidr` option when creating a token using the `vault token create` command. CIDR-bound tokens can also be created by some auth methods, such as AWS or Kubernetes, that can automatically bind the tokens to the source IP or network of the client. 
+  
+  Reference: Token - Auth Methods | Vault | HashiCorp Developer, vault token create - Command | Vault | HashiCorp Developer
 
-  Reference: Identity: entities and groups | Vault |
+</details>
+
+> #### Q26: Where does the Vault Agent store its cache?
+
+- [ ] In Memory
+- [ ] In an unencrypted file
+- [ ] In the Vault key/value store
+- [ ] In a file encrypted using the Vault transit secret engine
+<details>
+  <summary> Answer </summary>
+
+  In Memory
+  The Vault Agent stores its cache in memory, which means that it does not persist the cached tokens and secrets to disk or any other storage backend. This makes the cache more secure and performant, as it avoids exposing the sensitive data to potential attackers or unauthorized access. However, this also means that the cache is volatile and will be lost if the agent process is terminated or restarted. To mitigate this, the agent can optionally use a persistent cache file to restore the tokens and leases from a previous agent process. The persistent cache file is encrypted using a key derived from the agent’s autoauth token and a nonce, and it is stored in a user-specified location on disk.
+
+  Reference: Caching - Vault Agent | Vault | HashiCorp Developer, Vault Agent Persistent Caching | Vault | HashiCorp Developer
 
 </details>
