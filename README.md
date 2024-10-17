@@ -284,17 +284,19 @@ it becomes invalid.
 
 </details>
 
-> #### Q19: What are orphan tokens?
+> #### Q19: To give a role the ability to display or output all of the end points under the /secrets/apps/* end point it would need to have which capability set?
 
-- [ ] Orphan tokens are tokens with a use limit so you can set the number of uses when you create them
-- [ ] Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does
-- [ ] Orphan tokens are tokens with no policies attached
-- [ ] Orphan tokens do not expire when their own max TTL is reached
+- [ ] update
+- [ ] read
+- [ ] sudo
+- [ ] list
+- [ ] None of the above
 <details>
   <summary> Answer </summary>
 
-  Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does.
-  An orphan token is a token that cannot be cascaded to be revoked when its parent token is revoked. Typically, when a parent token is revoked, all child tokens created by it are also revoked. However, orphan tokens are an exception, as they do not have this parent-child association and therefore remain active when the parent token is revoked.
+  List
 
 </details>
+
+
 
