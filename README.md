@@ -294,9 +294,26 @@ it becomes invalid.
 <details>
   <summary> Answer </summary>
 
-  List
+  List - In Vault, permission is required to view or output all endpoints under a path. The permission allows the role to view all key names under the path, but does not provide the content of the key. “list”
 
 </details>
 
+> #### Q20: You have been tasked with writing a policy that will allow read permissions for all secrets at path `secret/bar`. The users that are assigned this policy should also be able to list the secrets. What should this policy look like?
 
+- [ ] `path "secret/bar/*" {capabilities = ["read","list"]}`
+- [ ] `path "secret/bar/*" {capabilities = ["list"]} path "secret/bar/" {capabilities = ["read"]}`
+- [ ] `path "secret/bar/*" {capabilities = ["read"]} path "secret/bar/" {capabilities = ["list"]}`
+- [ ] `path "secret/bar/+" {capabilities = ["read","list"]}`
+<details>
+  <summary> Answer </summary>
+
+  ```yaml
+  path "secret/bar/*" 
+  {
+  capabilities = ["read","list"]
+  }
+  ```
+This policy will allow the user to read all the secrets in the read path and list all the secrets in that path. The asterisk (*) here is a wildcard that indicates all possible subpaths under the path. Such a policy setup ensures that the user can not only list all the secrets, but also read each one. `secret/bar/*`
+
+</details>
 
