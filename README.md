@@ -150,7 +150,7 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
 
   Reference: Dynamic secrets | Vault | HashiCorp Developer, What are dynamic secrets and why do I need them? - HashiCorp
 </details>
-`
+
 > #### Q12: What environment variable overrides the CLI's default Vault server address?
 
 - [ ] `VAULT_ADDR`
