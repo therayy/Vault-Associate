@@ -316,3 +316,36 @@ This policy will allow the user to read all the secrets in the read path and lis
 
 </details>
 
+> #### Q21: When using Integrated Storage, which of the following should you do to recover from possible data loss?
+
+- [ ] Failover to a standby node
+- [ ] Use snapshot
+- [ ] Use audit logs
+- [ ] Use server logs
+<details>
+  <summary> Answer </summary>
+
+  Use snapshot, Integrated Storage is a Raft-based storage backend that allows Vault to store its data internally without relying on an external storage system. It also enables Vault to run in high availability mode with automatic leader election and failover. However, Integrated Storage is not immune to data loss or corruption due to hardware failures, network partitions, or human errors. Therefore, it is recommended to use the snapshot feature to backup and restore the Vault data periodically or on demand. A snapshot is a point-in-time capture of the entire Vault data, including the encrypted secrets, the configuration, and the metadata. Snapshots can be taken and restored using the `vault operator raft snapshot` command or the `sys/storage/raft/snapshot` API endpoint. Snapshots are encrypted and can only be restored with a quorum of unseal keys or recovery keys. Snapshots are also portable and can be used to migrate data between different Vault clusters or storage backends.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/integrated-storage1,
+  https://developer.hashicorp.com/vault/docs/commands/operator/raft/snapshot2,
+  https://developer.hashicorp.com/vault/api-docs/system/storage/raft/snapshot3
+</details>
+
+> #### Q22: How many Shamir's key shares are required to unseal a Vault instance?
+
+- [ ] All key shares
+- [ ] A quorum of key shares
+- [ ] One or more keys
+- [ ] The threshold number of key shares
+<details>
+  <summary> Answer </summary>
+
+  Shamir’s Secret Sharing is a cryptographic algorithm that allows a secret to be split into multiple parts, called key shares, such that a certain number of key shares are required to reconstruct the secret. The number of key shares and the threshold number are configurable parameters that depend on the desired level of security and availability. Vault uses Shamir’s Secret Sharing to protect its master key, which is used to encrypt and decrypt the data encryption key that secures the Vault data. When Vault is initialized, it generates a master key and splits it into a configured number of key shares, which are then distributed to trusted operators. To unseal Vault, the threshold number of key shares must be provided to reconstruct the master key and decrypt the data encryption key. This process ensures that no single operator can access the Vault data without the cooperation of other key holders.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/seal4,
+  https://developer.hashicorp.com/vault/docs/commands/operator/init5,
+  https://developer.hashicorp.com/vault/docs/commands/operator/unseal6
+</details>
