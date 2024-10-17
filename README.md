@@ -530,3 +530,44 @@ Which statement describes the fix for this issue?
 
   Reference: AWS - Auth Methods | Vault | HashiCorp Developer, AppRole - Auth Methods | Vault | HashiCorp Developer, JWT/OIDC - Auth Methods | Vault | HashiCorp Developer, Kubernetes - Auth Methods | Vault | HashiCorp Developer
 </details>
+
+> #### Q34: You are using Vault's Transit secrets engine to encrypt your data. You want to reduce the amount of content encrypted with a single key in case the key gets compromised. How would you do this?
+
+- [ ] Use 4096-bit RSA key to encrypt the data
+- [ ] Upgrade to Vault Enterprise and integrate with HSM
+- [ ] Periodically re-key the Vault's unseal keys
+- [ ] Periodically rotate the encryption key
+
+<details>
+  <summary> Answer </summary>
+
+  Periodically rotate the encryption key
+
+  The Transit secrets engine supports the rotation of encryption keys, which allows you to change the key that is used to encrypt new data without affecting the ability to decrypt data that was already encrypted. This reduces the amount of content encrypted with a single key in case the key gets compromised, and also helps you comply with the NIST guidelines for key rotation. You can rotate the encryption key manually by invoking the `/transit/keys/<name>/rotate` endpoint, or you can configure the key to automatically rotate based on a time interval or a number of encryption operations. When you rotate a key, Vault generates a new key version and increments the key’s `latest_version` metadata. The new key version becomes the encryption key used for encrypting any new data. The previous key versions are still available for decrypting the existing data, unless you specify a minimum decryption version to archive the old key versions. You can also delete or disable old key versions if you want to revoke access to the data encrypted with those versions.
+
+  [Reference](https://developer.hashicorp.com/vault/docs/secrets/transit1, https://developer.hashicorp.com/vault/apidocs/secret/transit2)
+</details>
+
+> #### Q35: What does the following policy do?
+```
+path "secret/data/{{identity.entity.id}}/*" {
+  capabilities = ["create", "update", "read", "delete"]
+}
+
+path "secret/metadata/{{identity.entity.id}}/*" {
+  capabilities = ["list"]
+}
+```
+
+- [ ] Grants access for each user to a KV folder which shares their id
+- [ ] Grants access to a special system entity folder
+- [ ] Allows a user to read data about the secret endpoint identity
+- [ ] Nothing, this is not a valid policy
+
+<details>
+  <summary> Answer </summary>
+
+  Grants access for each user to a KV folder which shares their id
+  This policy uses templated paths that allow each user to access the corresponding `key-value` store (KV) path based on their entity ID, a unique identifier within a vault. What's in the policy is a variable that will be replaced with the actual ID of the entity at runtime, so each user can only access the path that matches their entity `ID.{{identity.entity.id}}` The first part of the policy allows users to `create`, `update`, `read`, and `delete` in their personal KV path. The second part of the policy allows users to list the metadata information associated with their entity ID under the path. `secret/metadata/`
+
+</details>
