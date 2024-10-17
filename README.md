@@ -628,3 +628,35 @@ When are you shown these options in the GUI?
 
 </details>   
 
+> #### Q39: Examine the command below. Output has been trimmed:
+```bash
+$ vault write auth/approle/login \
+role_id="debb8f13-79ea-3e3d-8100-10711d85c1fb" \ 
+secret_id="31d52faa-5b0b-711d-2ea2=c197cff6081b"Key Value
+```
+  |   |  |
+  | --- | --- |
+  | token | b.AAAAAQI1...trimmed.... | 
+  | token_accessor | n/a |
+  | token_duration | 1m |
+  | token_renewable | false |
+  | token_policies | ["shipping"] |
+  | identity_policies | [] |
+  | policies | ["shipping"] |
+  | token_meta_role_name | shipping |
+  | --- | --- |
+  
+Which of the following statements describe the command and its output?
+- [ ] Missing a default token policy
+- [ ] Generated token's TTL is 60 hours
+- [ ] Generated token is an orphan token which can be renewed indefinitely
+- [ ] Configures the AppRole auth method with user specified role ID and secret ID
+
+<details>
+  <summary> Answer </summary>
+
+  Configures the AppRole auth method with user specified role ID and secret ID
+
+  This command is a command to log in using the AppRole authentication method. In this example, and is used to request a Vault token. The output shows the various properties of the generated token, including the token itself, the policy of the token, and other metadata for the token. role_idsecret_id
+
+</details>   
