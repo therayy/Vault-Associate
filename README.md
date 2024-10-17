@@ -146,5 +146,20 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
 <details>
   <summary> Answer </summary>
   
-  Use of a short-lived dynamic secrets
+  Use of a short-lived dynamic secrets Dynamic secrets are generated on-demand by Vault and automatically revoked when they are no longer needed. This way, the credentials are not stored in plain text or in a static database, and they can be rotated frequently to prevent unauthorized access. Dynamic secrets also provide encryption as a service, which means that they perform cryptographic operations on data in transit without storing any data. This adds an extra layer of security and reduces the risk of data leakage or tampering.
+
+  Reference: Dynamic secrets | Vault | HashiCorp Developer, What are dynamic secrets and why do I need them? - HashiCorp
+</details>
+`
+> #### Q12: What environment variable overrides the CLI's default Vault server address?
+
+- [ ] `VAULT_ADDR`
+- [ ] `VAULT_HTTP_ADORESS`
+- [ ] `VAULT_ADDRESS`
+- [ ] `VAULT_HTTPS_ADDRESS`
+<details>
+  <summary> Answer </summary>
+  
+  `VAULT_ADDR`
+  This environment variable can be set to the URL of the Vault server, which is used by Vault's CLI tool to communicate with the Vault server.
 </details>
