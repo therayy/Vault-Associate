@@ -163,3 +163,28 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
   `VAULT_ADDR`
   This environment variable can be set to the URL of the Vault server, which is used by Vault's CLI tool to communicate with the Vault server.
 </details>
+
+> #### Q13: Which of the following statements describe the CLI command below?
+`vault login -method-ldap username-mitche11h`
+- [ ] Generates a token which is respone wrapped
+- [ ] You will be prompted to enter the password
+- [ ] By default the gernerated token is valid for 24 hours
+- [ ] Fails because the password is not provided
+<details>
+  <summary> Answer </summary>
+  
+  This command is a command to log in to Vault using the LDAP method. Usually, after executing this command, the user is prompted to enter their password, rather than the command immediately failing because the password was not provided. `vault login -method=ldap username=mitchellh`
+</details>
+
+> #### Q14: The following three policies exist in Vault.
+What do these policies allow an oraginization to do?
+![alt text](policies.png)
+- [ ] Generates a token which is respone wrapped
+- [ ] You will be prompted to enter the password
+- [ ] By default the gernerated token is valid for 24 hours
+- [ ] Fails because the password is not provided
+<details>
+  <summary> Answer </summary>
+  
+  
+</details>
