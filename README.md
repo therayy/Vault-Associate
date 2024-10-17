@@ -480,7 +480,53 @@ Which statement describes the fix for this issue?
   <summary> Answer </summary>
 
   Replace write with create in the capabilities list
-  The error was thrown because the policy code contains an invalid capability, “write”. The valid capabilities for a policy are “create”, “read”, “update”, “delete”, “list”, and “sudo”. The “write” capability is not recognized by Vault and should be replaced with “create”, which allows creating new secrets or overwriting existing ones. The other statements are not correct, because the wildcard (*) and the sudo capability are both valid in a policy. The wildcard matches any number of characterswithin a path segment, and the sudo capability allows performing certain operations that require root privileges.
+  The error was thrown because the policy code contains an invalid capability, `write`. The valid capabilities for a policy are `create`, `read`, `update`, `delete`, `list`, and `sudo`. The “write” capability is not recognized by Vault and should be replaced with `create`, which allows creating new secrets or overwriting existing ones. The other statements are not correct, because the wildcard (`*`) and the sudo capability are both valid in a policy. The wildcard matches any number of characters within a path segment, and the sudo capability allows performing certain operations that require root privileges.
 
   Reference: [Policy Syntax | Vault | HashiCorp Developer] [Policy Syntax | Vault | HashiCorp Developer]
+</details>
+
+> #### Q31: Where can you set the Vault seal configuration? Choose two correct answers.
+
+- [ ] Cloud Provider KMS
+- [ ] Vault CLI
+- [ ] Vault Configuration file
+- [ ] Enviornment variables
+- [ ] Vault API
+<details>
+  <summary> Answer </summary>
+
+  Vault Configuration file & Vault API 
+  The archive configuration is typically set in the vault's configuration file and is read when the vault service is started. This configuration file contains various parameters related to the storage mechanism, such as the type of storage used (e.g. KMS, the cloud provider used by Auto Unseal) and the associated configuration items. In addition, the Vault API can be used to configure certain hold-related settings, especially when initializing the vault or setting up Auto Unseal.
+</details>
+
+> #### Q32: Which of the following vault lease operations uses a `lease_id` as an argument? Choose two correct answers.
+
+- [ ] `renew`
+- [ ] `revoke -prefix`
+- [ ] `create`
+- [ ] `describe`
+- [ ] `revoke`
+<details>
+  <summary> Answer </summary>
+
+  `renew lease_id` and `revoke lease_id`
+
+  The vault lease operations that use a `lease_id` as an argument are `renew` and `revoke`. The renew operation allows a client to extend the validity of a lease associated with a secret or a token. The revoke operation allows a client to terminate a lease immediately and invalidate the secret or the token. Both operations require a `lease_id` as an argument to identify the lease to be renewed or revoked. The `lease_id` can be obtained from the response of reading a secret or creating a token, or from the `vault lease list` command. The other operations, `revoke-prefix`, `create`, and `describe`, do not use a `lease_id` as an argument. The `revoke-prefix` operation allows a client to revoke all secrets or tokens generated under a given prefix. The `create` operation allows a client to create a new lease for a secret. The `describe` operation allows a client to view information about a lease, such as its TTL, policies, and metadata.
+
+  Reference: Lease, Renew, and Revoke | Vault | HashiCorp Developer, vault lease - Command | Vault | HashiCorp Developer
+</details>
+
+> #### Q33: An organization wants to authenticate an AWS EC2 virtual machine with Vault to access a dynamic database secret. The only authentication method which they can use in this case is AWS.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+
+  False
+
+  An organization can authenticate an AWS EC2 virtual machine with Vault to access a dynamic database secret using more than one authentication method. The AWS auth method is one of the options, but not the only one. The AWS auth method supports two types of authentication: ec2 and iam. The ec2 type uses the signed EC2 instance identity document to authenticate the EC2 instance. The iam type uses the AWS Signature v4 algorithm to sign a request to the sts:GetCallerIdentity API and authenticate the IAM principal. However, the organization can also use other auth methods that are compatible with EC2 instances, such as AppRole,JWT/OIDC, or Kubernetes. These methods require the EC2 instance to have some sort of identity material, such as a role ID, a secret ID, a JWT token, or a service account token, that can be used to authenticate to Vault. The identity material can be provisioned to the EC2 instance using various mechanisms, such as user data, metadata service, or cloud-init scripts. The choice of the auth method depends on the use case, the security requirements, and the trade-offs between convenience and control.
+
+  Reference: AWS - Auth Methods | Vault | HashiCorp Developer, AppRole - Auth Methods | Vault | HashiCorp Developer, JWT/OIDC - Auth Methods | Vault | HashiCorp Developer, Kubernetes - Auth Methods | Vault | HashiCorp Developer
 </details>
