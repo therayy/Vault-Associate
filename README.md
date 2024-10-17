@@ -25,13 +25,11 @@
 
 > #### Q3: HOTSPOT Where do you define the Namespace to log into using the Vault UI?
 ![alt text](image.png)
-- [ ] `vault put auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
-- [ ] `vault write userpass/sally password=h0wN0wB4r0wnC0w policies=power-users`
-- [ ] `vault kv write userpass/sally password=h0wN0wB4r0wnC0w policies=power-users`
-- [ ] `vault write auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
+
 <details>
   <summary> Answer </summary>
   
-  `vault put auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
-  
+  The namespace can be defined in the "Mount Path" field in the "Advance Options" section of the login screen. The mount Path is the path where the auth method is enabled, and it can include a namespace prefix. For example LDAP auth method is enabled at the path `ns1/auth/ldap`, where `ns1` is the namespace, then the mount path field should be set to `ns1/auth/ldap` this way, the Vault UI will log in to the correct namespace and auth method. Alternatively, the namespace can also be specified in the URL of the Vault UI, such as 
+ ***https://vault.example.com/ui/vault/auth/ns1/auth/ldap/login***
+
 </details>
