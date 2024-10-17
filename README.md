@@ -307,7 +307,7 @@ it becomes invalid.
 <details>
   <summary> Answer </summary>
 
-  ```yaml
+  ```
   path "secret/bar/*" 
   {
   capabilities = ["read","list"]
