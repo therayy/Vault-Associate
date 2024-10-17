@@ -927,3 +927,22 @@ decrypted
   Reference: Auth Methods | Vault | HashiCorp Developer, Authentication - Concepts | Vault | HashiCorp Developer
 
 </details>  
+
+> #### Q52: Which Vault secret engine may be used to build your own internal certificate authority?
+
+- [ ] Transit
+- [ ] PKI
+- [ ] PostgreSQL
+- [ ] Generic
+
+<details>
+  <summary> Answer </summary>
+
+  PKI
+
+  The Vault secret engine that can be used to build your own internal certificate authority is the PKI secret engine. The PKI secret engine generates dynamic X.509 certificates on-demand, without requiringmanual processes of generating private keys and CSRs, submitting to a CA, and waiting for verification and signing. The PKI secret engine can act as a root CA or an intermediate CA, and can issue certificates for various purposes, such as TLS, code signing, email encryption, etc. The PKI secret engine can also manage the certificate lifecycle, such as rotation, revocation, renewal, and CRL generation. The PKI secret engine can also integrate with external CAs, such as Venafi or Entrust, to delegate the certificate issuance and management.
+
+  Reference: PKI - Secrets Engines | Vault | HashiCorp Developer, Build Your Own Certificate Authority(CA) | Vault - HashiCorp Learn
+
+</details>  
+
