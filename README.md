@@ -176,15 +176,125 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
   This command is a command to log in to Vault using the LDAP method. Usually, after executing this command, the user is prompted to enter their password, rather than the command immediately failing because the password was not provided. `vault login -method=ldap username=mitchellh`
 </details>
 
-> #### Q14: The following three policies exist in Vault.
-What do these policies allow an oraginization to do?
+> #### Q14: The following three policies exist in Vault. What do these policies allow an oraginization to do?
 ![alt text](policies.png)
-- [ ] Generates a token which is respone wrapped
-- [ ] You will be prompted to enter the password
-- [ ] By default the gernerated token is valid for 24 hours
-- [ ] Fails because the password is not provided
+- [ ] Separates permissions allowed on actions associated with the transit secret engine
+- [ ] Nothing, as the minimum permissions to perform useful tasks are not present
+- [ ] Encrypt, decrypt, and rewrap data using the transit engine all in one policy
+- [ ] Create a transit encryption key for encrypting, decrypting, and rewrapping encrypted data
 <details>
   <summary> Answer </summary>
-  
-  
+  Separates permissions allowed on actions associated with the transit secret engine
+  These policies allow organizations to:
+  Separates permissions allowed on actions associated with the transit secret engine Here's how to do it: app.hcl The policy allows the entity to perform cryptographic operations using a specific key () of the Transit secret engine my_app_key callcenter.hcl The policy allows decryption operations to be performed on the same my_app_key rewrap.hcl Policies allow the key to be read and the data to be reencapsulated, which essentially decrypts and re-encrypts the data without displaying plaintext, which is useful for rotating the underlying encryption key. Each policy targets specific operations of the Transit secret engine, enabling fine-grained access control to encryption,decryption, and key management functions. This is important for maintaining a strict separation of duties within the organization.
+
 </details>
+
+> #### Q15: Your DevOps team would like to provision VMs in GCP via CICD pipeline. They would like to integrate Vault to protect the credentials used by the tool. Which secrets engine would you recommend?
+
+- [ ] Google Cloud Secrets Engine
+- [ ] Identity secrets engine
+- [ ] Key/Value secrets engine version 2
+- [ ] SSH secrets engine
+<details>
+  <summary> Answer </summary>
+ 
+  The Google Cloud Secrets Engine is the best option for the DevOps team to provision VMs in GCP via a CICD pipeline and integrate Vault to protect the credentials used by the tool. The Google Cloud Secrets Engine can dynamically generate GCP service account keys or OAuth tokens based on IAM policies, which can be used to authenticate and authorize the CICD tool to access GCP resources. The credentials are automatically revoked when they are no longer used or when the lease expires, ensuring that the credentials are short-lived and secure. The DevOps team can configure rolesets or static accounts in Vault to define the scope and permissions of the credentials, and use the Vault API or CLI to request credentials on demand. The Google Cloud Secrets Engine also supports generating access tokens for impersonated service accounts, which can be useful for delegating access to other serviceaccounts without storing or managing their keys. The Identity Secrets Engine is not a good option for this use case, because it does not generate GCP credentials, but rather generates identity tokens that can be used to access other Vault secrets engines or namespaces. The Key/Value Secrets Engine version 2 is also not a good option, because it does not
+  generate dynamic credentials, but rather stores and manages static secrets that the user provides. The SSH Secrets Engine is not a good option either, because it does not generate GCP credentials, but rather generates SSH keys or OTPs that can be used to access remote hosts via SSH.
+
+  Reference: Google Cloud - Secrets Engines | Vault | HashiCorp Developer Identity - Secrets Engines | Vault | HashiCorp Developer KV - Secrets Engines | Vault
+</details>
+
+> #### Q15: Your DevOps team would like to provision VMs in GCP via CICD pipeline. They would like to integrate Vault to protect the credentials used by the tool. Which secrets engine would you recommend?
+
+- [ ] Google Cloud Secrets Engine
+- [ ] Identity secrets engine
+- [ ] Key/Value secrets engine version 2
+- [ ] SSH secrets engine
+<details>
+  <summary> Answer </summary>
+ 
+  The Google Cloud Secrets Engine is the best option for the DevOps team to provision VMs in GCP via a CICD pipeline and integrate Vault to protect the credentials used by the tool. The Google Cloud Secrets Engine can dynamically generate GCP service account keys or OAuth tokens based on IAM policies, which can be used to authenticate and authorize the CICD tool to access GCP resources. The credentials are automatically revoked when they are no longer used or when the lease expires, ensuring that the credentials are short-lived and secure. The DevOps team can configure rolesets or static accounts in Vault to define the scope and permissions of the credentials, and use the Vault API or CLI to request credentials on demand. The Google Cloud Secrets Engine also supports generating access tokens for impersonated service accounts, which can be useful for delegating access to other serviceaccounts without storing or managing their keys. The Identity Secrets Engine is not a good option for this use case, because it does not generate GCP credentials, but rather generates identity tokens that can be used to access other Vault secrets engines or namespaces. The Key/Value Secrets Engine version 2 is also not a good option, because it does not generate dynamic credentials, but rather stores and manages static secrets that the user provides. The SSH Secrets Engine is not a good option either, because it does not generate GCP credentials, but rather generates SSH keys or OTPs that can be used to access remote hosts via SSH.
+
+  Reference: Google Cloud - Secrets Engines | Vault | HashiCorp Developer Identity - Secrets Engines | Vault | HashiCorp Developer KV - Secrets Engines | Vault
+</details>
+
+> #### Q16: Which of these is not a benefit of dynamic secrets?
+
+- [ ] Supports systems which do not natively provide a method of expiring credentials
+- [ ] Minimizes damage of credentials leaking
+- [ ] Ensures that administrators can see every password used
+- [ ] Replaces cumbersome password rotation tools and practices
+<details>
+  <summary> Answer </summary>
+
+Ensures that administrators can see every password use. Dynamic secrets are generated on-demand by Vault and have a limited time-to-live (TTL). THEY DO NOT
+ensure that administrators can see every password used, as they are often encrypted and ephemeral. 
+The benefits of dynamic secrets are:
+- They support systems that do not natively provide a method of expiring credentials, such as databases,
+cloud providers, SSH, etc. 
+- Vault can revoke the credentials when they are no longer needed or when the lease expires.
+- They minimize the damage of credentials leaking, as they are short-lived and can be easily rotated or revoked. If a credential is compromised, the attacker has a limited window of opportunity to use it before
+it becomes invalid.
+- They replace cumbersome password rotation tools and practices, as Vault can handle the generation and revocation of credentials automatically and securely. This reduces the operational overhead and complexity of managing secrets.
+
+  Reference:
+  https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-dynamic-secrets1,
+  https://developer.hashicorp.com/vault/docs/concepts/lease2
+
+</details>
+
+> #### Q17: Which of the following cannot define the maximum time-to-live (TTL) for a token?
+
+- [ ] By the authentication method t natively provide a method of expiring credentials
+- [ ] By the client system of credentials leaking
+- [ ] By the mount endpoint configuration very password used
+- [ ] A parent token TTL e password rotation tools and practices
+- [ ] System max TTL
+<details>
+  <summary> Answer </summary>
+
+  By the client system of credentials leaking, The maximum time-to-live (TTL) for a token is defined by the lowest value among the following factors:
+  - The authentication method that issued the token. Each auth method can have a default and a maximum TTL for the tokens it generates. These values can be configured by the auth method’s mount options or by the auth method’s specific endpoints.
+  - The mount endpoint configuration that the token is accessing. Each secrets engine can have a default and a maximum TTL for the leases it grants. These values can be configured by the secrets engine’s mount options or by the secrets engine’s specific endpoints.
+  - A parent token TTL. If a token is created by another token, it inherits the remaining TTL of its parent token, unless the parent token has an infinite TTL (such as the root token). A child token cannot outlive its parent token.
+  - System max TTL. This is a global limit for all tokens and leases in Vault. It can be configured by the system backend’s max_lease_ttl option.
+  - The client system that uses the token cannot define the maximum TTL for the token, as this is determined by Vault’s configuration and policies. The client system can only request a specific TTL for the token, but this request is subject to the limits imposed by the factors above.
+
+  Reference:
+  https://developer.hashicorp.com/vault/docs/concepts/tokens3,
+  https://developer.hashicorp.com/vault/docs/concepts/lease2,
+  https://developer.hashicorp.com/vault/docs/commands/auth/tune4,
+  https://developer.hashicorp.com/vault/docs/commands/secrets/tune5,
+  https://developer.hashicorp.com/vault/docs/commands/token/create6
+
+</details>
+
+> #### Q18: What are orphan tokens?
+
+- [ ] Orphan tokens are tokens with a use limit so you can set the number of uses when you create them
+- [ ] Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does
+- [ ] Orphan tokens are tokens with no policies attached
+- [ ] Orphan tokens do not expire when their own max TTL is reached
+<details>
+  <summary> Answer </summary>
+
+  Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does.
+  An orphan token is a token that cannot be cascaded to be revoked when its parent token is revoked. Typically, when a parent token is revoked, all child tokens created by it are also revoked. However, orphan tokens are an exception, as they do not have this parent-child association and therefore remain active when the parent token is revoked.
+
+</details>
+
+> #### Q19: What are orphan tokens?
+
+- [ ] Orphan tokens are tokens with a use limit so you can set the number of uses when you create them
+- [ ] Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does
+- [ ] Orphan tokens are tokens with no policies attached
+- [ ] Orphan tokens do not expire when their own max TTL is reached
+<details>
+  <summary> Answer </summary>
+
+  Orphan tokens are not children of their parent; therefore, orphan tokens do not expire when their parent does.
+  An orphan token is a token that cannot be cascaded to be revoked when its parent token is revoked. Typically, when a parent token is revoked, all child tokens created by it are also revoked. However, orphan tokens are an exception, as they do not have this parent-child association and therefore remain active when the parent token is revoked.
+
+</details>
+
