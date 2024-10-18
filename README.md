@@ -1302,3 +1302,18 @@ vault write transit/decrypt/password \
   A keyholder joins or leaves the organization
   Upgrading Vault Community Edition to Vault Enterprise 
 </details>
+
+#### Q75: Use this screenshot to answer the question below:
+![alt text](approle.png)
+Which statement describes this AppRole auth method configuration?
+
+- [ ] Generates batch tokens with TTL set to 5 minutes
+- [ ] Generates multiple tokens with TTL set to 5 minutes
+- [ ] It is enabled at “App1” path
+- [ ] It is enabled at “auth_approle_f23dd79f” path
+
+<details>
+  <summary> Answer </summary>
+  Generates batch tokens with TTL set to 5 minutes
+</details>
+
