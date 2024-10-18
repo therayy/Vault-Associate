@@ -24,7 +24,7 @@
 </details>
 
 > #### Q3: HOTSPOT Where do you define the Namespace to log into using the Vault UI?
-![alt text](signintovault.png)
+![alt text](Images/signintovault.png)
 
 <details>
   <summary> Answer </summary>
@@ -176,7 +176,7 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
 </details>
 
 > #### Q14: The following three policies exist in Vault. What do these policies allow an oraginization to do?
-![alt text](policies.png)
+![alt text](Images/policies.png)
 - [ ] Separates permissions allowed on actions associated with the transit secret engine
 - [ ] Nothing, as the minimum permissions to perform useful tasks are not present
 - [ ] Encrypt, decrypt, and rewrap data using the transit engine all in one policy
@@ -456,7 +456,7 @@ This policy will allow the user to read all the secrets in the read path and lis
 </details>
 
 > #### Q30: When creating a policy, an error was thrown:
-![alt text](aclpolicy.png)
+![alt text](Images/aclpolicy.png)
 Which statement describes the fix for this issue?
 - [ ] Replace write with create in the capabilities list
 - [ ] You cannot have a wildcard (" • ") in the path
@@ -596,7 +596,7 @@ path "secret/metadata/{{identity.entity.id}}/*" {
 </details>
 
 > #### Q38: Use this screenshot to answer the question below:
-![alt text](gui.png)
+![alt text](Images/gui.png)
 
 When are you shown these options in the GUI?
 - [ ] Enabling policies
@@ -951,7 +951,7 @@ decrypted
 </details>  
 
 > #### Q54: Use this screenshot to answer the question below:
-![alt text](secretengine.png)
+![alt text](Images/secretengine.png)
 
 Where on this page would you click to view a secret located at secret/my-secret?
 <details>
@@ -1025,7 +1025,7 @@ Where on this page would you click to view a secret located at secret/my-secret?
 </details>
 
 > #### Q57: Running the second command in the GUI CLI will succeed.
-![alt text](vaultcli.png)
+![alt text](Images/vaultcli.png)
 - [ ] True
 - [ ] False
 
@@ -1101,7 +1101,7 @@ vault write transit/decrypt/password \
 </details>
 
 #### Q61: Where on the page would you click to display the list of available Vault-created encryption keys.
-![alt text](transit.png)
+![alt text](Images/transit.png)
 
 
 <details>
@@ -1187,12 +1187,12 @@ vault write transit/decrypt/password \
 </details>
 
 #### Q66: HOTSPOT - For the following statements, choose which secrets engine enables the use case. Each answer should only be used once.?
-![alt text](hotspot.png)
+![alt text](Images/hotspot.png)
 
 <details>
   <summary> Answer </summary>
   
-  ![alt text](hotspotanswer.png)
+  ![alt text](Images/hotspotanswer.png)
 
 </details>
 
@@ -1304,7 +1304,7 @@ vault write transit/decrypt/password \
 </details>
 
 #### Q75: Use this screenshot to answer the question below:
-![alt text](approle.png)
+![alt text](Images/approle.png)
 Which statement describes this AppRole auth method configuration?
 
 - [ ] Generates batch tokens with TTL set to 5 minutes
@@ -1495,7 +1495,8 @@ Which statement describes this AppRole auth method configuration?
 
 <details>
   <summary> Answer </summary>
-   /auth/token/accessors
+   
+  /auth/token/accessors
 </details>
 
 #### Q90: The mechanism to associate an authentication method with access to specific secrets is by specifying a/an:
@@ -1507,5 +1508,22 @@ Which statement describes this AppRole auth method configuration?
 
 <details>
   <summary> Answer </summary>
-   Policy
+   
+  Policy
+</details>
+
+#### Q91: You are managing a Vault implementation that has been integrated with Azure SQL database to provide dynamic credentials. You have created a role that will provide database credentials for database administrators (DBAs) to use for managing their database in Azure SQL. A DBA has requested a new credential by issuing the following Vault CLI command: `vault read azuresql/creds/dba_access`. The following output is returned:
+![alt text](Images/leaseid.png)
+The DBA has completed their work and would like to proactively remove the credential now that their work is complete.
+Which of the following commands should the DBA execute?
+
+- [ ] `vault delete azuresql/creds/dba_access`
+- [ ] `vault lease revoke v-token-dba_acccss-tr2t4x9pxvqlz8878s9s-1513446795`
+- [ ] `vault delete azuresql/creds/dba_access/2e5b1e0b-a081-c7el-5622-39f58e79a7l9`
+- [ ] `vault lease revoke azuresql/creds/dba_access/2e5b1e0b-a081-c7el-5622-39f58e79a719`
+
+<details>
+  <summary> Answer </summary>
+    
+  `vault lease revoke azuresql/creds/dba_access/2e5b1e0b-a081-c7el-5622-39f58e79a719`
 </details>
