@@ -8,7 +8,7 @@
 <details>
   <summary> Answer </summary>
   
-  `vault put auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
+  `vault write auth/userpass/users/sally password=h0wN0wB4r0wnC0w policies=power-users`
   
 </details>
 
@@ -29,8 +29,7 @@
 <details>
   <summary> Answer </summary>
   
-  The namespace can be defined in the "Mount Path" field in the "Advance Options" section of the login screen. The mount Path is the path where the auth method is enabled, and it can include a namespace prefix. For example LDAP auth method is enabled at the path `ns1/auth/ldap`, where `ns1` is the namespace, then the mount path field should be set to `ns1/auth/ldap` this way, the Vault UI will log in to the correct namespace and auth method. Alternatively, the namespace can also be specified in the URL of the Vault UI, such as 
- ***https://vault.example.com/ui/vault/auth/ns1/auth/ldap/login***
+  Namespace 
 
 </details>
 
@@ -201,20 +200,6 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
  
   The Google Cloud Secrets Engine is the best option for the DevOps team to provision VMs in GCP via a CICD pipeline and integrate Vault to protect the credentials used by the tool. The Google Cloud Secrets Engine can dynamically generate GCP service account keys or OAuth tokens based on IAM policies, which can be used to authenticate and authorize the CICD tool to access GCP resources. The credentials are automatically revoked when they are no longer used or when the lease expires, ensuring that the credentials are short-lived and secure. The DevOps team can configure rolesets or static accounts in Vault to define the scope and permissions of the credentials, and use the Vault API or CLI to request credentials on demand. The Google Cloud Secrets Engine also supports generating access tokens for impersonated service accounts, which can be useful for delegating access to other serviceaccounts without storing or managing their keys. The Identity Secrets Engine is not a good option for this use case, because it does not generate GCP credentials, but rather generates identity tokens that can be used to access other Vault secrets engines or namespaces. The Key/Value Secrets Engine version 2 is also not a good option, because it does not
   generate dynamic credentials, but rather stores and manages static secrets that the user provides. The SSH Secrets Engine is not a good option either, because it does not generate GCP credentials, but rather generates SSH keys or OTPs that can be used to access remote hosts via SSH.
-
-  Reference: Google Cloud - Secrets Engines | Vault | HashiCorp Developer Identity - Secrets Engines | Vault | HashiCorp Developer KV - Secrets Engines | Vault
-</details>
-
-> #### Q15: Your DevOps team would like to provision VMs in GCP via CICD pipeline. They would like to integrate Vault to protect the credentials used by the tool. Which secrets engine would you recommend?
-
-- [ ] Google Cloud Secrets Engine
-- [ ] Identity secrets engine
-- [ ] Key/Value secrets engine version 2
-- [ ] SSH secrets engine
-<details>
-  <summary> Answer </summary>
- 
-  The Google Cloud Secrets Engine is the best option for the DevOps team to provision VMs in GCP via a CICD pipeline and integrate Vault to protect the credentials used by the tool. The Google Cloud Secrets Engine can dynamically generate GCP service account keys or OAuth tokens based on IAM policies, which can be used to authenticate and authorize the CICD tool to access GCP resources. The credentials are automatically revoked when they are no longer used or when the lease expires, ensuring that the credentials are short-lived and secure. The DevOps team can configure rolesets or static accounts in Vault to define the scope and permissions of the credentials, and use the Vault API or CLI to request credentials on demand. The Google Cloud Secrets Engine also supports generating access tokens for impersonated service accounts, which can be useful for delegating access to other serviceaccounts without storing or managing their keys. The Identity Secrets Engine is not a good option for this use case, because it does not generate GCP credentials, but rather generates identity tokens that can be used to access other Vault secrets engines or namespaces. The Key/Value Secrets Engine version 2 is also not a good option, because it does not generate dynamic credentials, but rather stores and manages static secrets that the user provides. The SSH Secrets Engine is not a good option either, because it does not generate GCP credentials, but rather generates SSH keys or OTPs that can be used to access remote hosts via SSH.
 
   Reference: Google Cloud - Secrets Engines | Vault | HashiCorp Developer Identity - Secrets Engines | Vault | HashiCorp Developer KV - Secrets Engines | Vault
 </details>
