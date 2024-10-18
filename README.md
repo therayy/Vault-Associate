@@ -1140,7 +1140,7 @@ vault write transit/decrypt/password \
 <details>
   <summary> Answer </summary>
 
-  By using batch tokens
+  Flags take precedence over environment variables
 
 </details>
 
