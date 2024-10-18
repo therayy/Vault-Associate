@@ -1172,3 +1172,16 @@ vault write transit/decrypt/password \
 
 </details>
 
+#### Q65: Which statement describes the results of this command: `vault kv list secret/test`?
+- [ ] Check the status of a specific `key/value` secrets engine
+- [ ] List the existing key names at the `secret/test` path
+- [ ] Output all `key/value` secrets engines
+- [ ] Output all key names from all `key/value` secrets engine
+
+
+<details>
+  <summary> Answer </summary>
+  
+  List the existing key names at the `secret/test` path
+
+</details>
