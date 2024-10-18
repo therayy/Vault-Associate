@@ -1277,3 +1277,28 @@ vault write transit/decrypt/password \
   AES256 Encryption 
 
 </details>
+
+#### Q73: How does HashiCorp reduce secrets sprawl?
+- [ ] Granular access control, firmware updates, and audit trails
+- [ ] Secrets management, centralization, and decryption
+- [ ] HashiCorp is not designed to reduce secrets sprawl 
+- [ ] Encryption, granular access control, and audit trails
+
+<details>
+  <summary> Answer </summary>
+  
+  Encryption, granular access control, and audit trails
+
+</details>
+
+#### Q74: Which of the following is a reason to rekey a Vault cluster? (Choose two.)
+- [ ] A keyholder joins or leaves the organization
+- [ ] Adding additional Vault nodes to a cluster
+- [ ] A compliance mandate to rotate the master key at a regular interval
+- [ ] Upgrading Vault Community Edition to Vault Enterprise
+
+<details>
+  <summary> Answer </summary>
+  A keyholder joins or leaves the organization
+  Upgrading Vault Community Edition to Vault Enterprise 
+</details>
