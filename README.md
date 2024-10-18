@@ -177,6 +177,7 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
 
 > #### Q14: The following three policies exist in Vault. What do these policies allow an oraginization to do?
 ![alt text](Images/policies.png)
+
 - [ ] Separates permissions allowed on actions associated with the transit secret engine
 - [ ] Nothing, as the minimum permissions to perform useful tasks are not present
 - [ ] Encrypt, decrypt, and rewrap data using the transit engine all in one policy
@@ -457,7 +458,9 @@ This policy will allow the user to read all the secrets in the read path and lis
 
 > #### Q30: When creating a policy, an error was thrown:
 ![alt text](Images/aclpolicy.png)
+
 Which statement describes the fix for this issue?
+
 - [ ] Replace write with create in the capabilities list
 - [ ] You cannot have a wildcard (" • ") in the path
 - [ ] sudo is not a capability
@@ -1026,6 +1029,7 @@ Where on this page would you click to view a secret located at secret/my-secret?
 
 > #### Q57: Running the second command in the GUI CLI will succeed.
 ![alt text](Images/vaultcli.png)
+
 - [ ] True
 - [ ] False
 
@@ -1305,6 +1309,7 @@ vault write transit/decrypt/password \
 
 #### Q75: Use this screenshot to answer the question below:
 ![alt text](Images/approle.png)
+
 Which statement describes this AppRole auth method configuration?
 
 - [ ] Generates batch tokens with TTL set to 5 minutes
