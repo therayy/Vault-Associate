@@ -1465,3 +1465,47 @@ Which statement describes this AppRole auth method configuration?
    It is one of the built-in policies
    Provides a common set of permissions and is included on all tokens by default
 </details>
+
+#### Q87: Why might an application be mapped to an identity entity?
+
+- [ ] To prohibit Vault administrators from revoking tokens associated with that application
+- [ ] To get around cloud license limitations
+- [ ] To allow an application deployed with multiple authentication methods have a consistent set of policies
+- [ ] To allow the same application in one cloud to access already provisioned Vault tokens for that application in another cloud
+<details>
+  <summary> Answer </summary>
+   To allow an application deployed with multiple authentication methods have a consistent set of policies
+</details>
+
+#### Q88: Unsealing a single Vault server in a cluster unseals all Vault servers in that cluster.
+
+- [ ] True
+- [ ] False
+<details>
+  <summary> Answer </summary>
+   False
+</details>
+
+#### Q89: Which endpoint can be used to list all tokens?
+
+- [ ] /kv/secrets
+- [ ] /auth/token/list
+- [ ] /secrets/kv
+- [ ] /auth/token/accessors
+
+<details>
+  <summary> Answer </summary>
+   /auth/token/accessors
+</details>
+
+#### Q90: The mechanism to associate an authentication method with access to specific secrets is by specifying a/an:
+
+- [ ] Accessor
+- [ ] Token
+- [ ] Policy
+- [ ] Secret
+
+<details>
+  <summary> Answer </summary>
+   Policy
+</details>
