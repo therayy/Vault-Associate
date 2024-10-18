@@ -171,7 +171,7 @@ Reference: AppRole Auth Method | Vault | HashiCorp Developer Okta Auth Method | 
 - [ ] Fails because the password is not provided
 <details>
   <summary> Answer </summary>
-  
+  You will be prompted to enter the password
   This command is a command to log in to Vault using the LDAP method. Usually, after executing this command, the user is prompted to enter their password, rather than the command immediately failing because the password was not provided. `vault login -method=ldap username=mitchellh`
 </details>
 
