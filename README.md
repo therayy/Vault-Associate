@@ -1356,3 +1356,77 @@ Which statement describes this AppRole auth method configuration?
   <summary> Answer </summary>
    False 
 </details>
+
+#### Q79: Which kind of token can be renewed indefinitely?
+
+- [ ] Periodic token
+- [ ] Orphan token
+- [ ] Use-limit token
+- [ ] Root token
+- [ ] All of the above
+
+<details>
+  <summary> Answer </summary>
+   Periodic token 
+</details>
+
+#### Q79: You can use a response-wrapping token more than once for as long as it has not expired.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+   False
+</details>
+
+#### Q80: Which statement describes the results of this command: `$ vault secrets enable -version=2 kv` (Choose two.)
+
+- [ ] Enables the secrets engine at path kv2/
+- [ ] The -version is an invalid flag
+- [ ] Enables the secrets engine at path kv/
+- [ ] Enables K/V v1 secrets engine
+- [ ] Enables K/V v2 secrets engine
+<details>
+  <summary> Answer </summary>
+   Enables the secrets engine at path kv/
+   Enables K/V v2 secrets engine
+</details>
+
+#### Q81: Which of these are names of the replication methods available in Vault Enterprise? (Choose two.)
+
+- [ ] Disaster Recovery
+- [ ] Cluster sharping
+- [ ] Namespaces
+- [ ] Seal-Wrap
+- [ ] Performance
+<details>
+  <summary> Answer </summary>
+   Disaster Recovery 
+   Performance
+</details>
+
+#### Q82: What attributes are unique to batch tokens? (Choose three.)
+
+- [ ] Cannot be renewed
+- [ ] Are not persisted
+- [ ] Can be periodic
+- [ ] Have a set time-to-live (TTL)
+- [ ] Are persisted
+<details>
+  <summary> Answer </summary>
+   Cannot be renewed
+   Have a set time-to-live (TTL)
+   Are not persisted
+</details>
+
+#### Q83: You have manually created some usernames and passwords for a Microsoft SQL database on Azure, and need to store these credentials in Vault. What secrets engine should you use for this?
+
+- [ ] MSSQL database secrets engine
+- [ ] Key/Value secrets engine version 2
+- [ ] Azure secrets engine
+- [ ] Transit engine
+<details>
+  <summary> Answer </summary>
+   Azure secrets engine
+</details>
