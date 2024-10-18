@@ -1054,3 +1054,78 @@ Where on this page would you click to view a secret located at secret/my-secret?
   Reference: kv - Command | Vault | HashiCorp Developer, vault secrets enable - Command | Vault | HashiCorp Developer
 
 </details>
+
+> #### Q58: Which statements correctly describe the command below. Choose TWO correct answers.
+```bash
+vault write transit/decrypt/password \
+  ciphertext=vault:v1:8SDd3WHDOjf7mq69CyCqYjBXAiQQAVZRkFM13ok481zoCmHnSeDX9vyf7w==
+```
+- [ ] Returns an error due to missing encryption key name
+- [ ] Returns base64-encoded plaintext
+- [ ] Decrypts the ciphertext if the token permits
+- [ ] Returns the ciphertext
+- [ ] Requires `sudo` capability on the `transit/decrypt/password` path
+
+<details>
+  <summary> Answer </summary>
+
+    Returns base64-encoded plaintext
+    & Decrypts the ciphertext if the token permits
+
+    [Refrence](https://developer.hashicorp.com/vault/docs/secrets/transit)
+
+</details>
+
+> #### Q59: Which of the following statements explains the benefit of response wrapping? Choose TWO correct answers.
+```bash
+vault write transit/decrypt/password \
+  ciphertext=vault:v1:8SDd3WHDOjf7mq69CyCqYjBXAiQQAVZRkFM13ok481zoCmHnSeDX9vyf7w==
+```
+- [ ] Limits the time of secret exposure by having a short-lived wrapping token
+- [ ] Allow versioning of the secrets
+- [ ] It protects Vault's root key (previously known as master key)
+- [ ] Only the reference to the secrets is transmitted over the public network
+- [ ] Limits the size of secrets to be transmitted over the network
+
+<details>
+  <summary> Answer </summary>
+
+    Limits the time of secret exposure by having a short-lived wrapping token
+    & Only the reference to the secrets is transmitted over the public network
+
+    [Refrence](https://developer.hashicorp.com/vault/docs/concepts/response-wrapping)
+
+</details>
+
+> #### Q60: Your organization has recently adopted Vault open source. You have been asked to enable the Vault K/V Version 2 secrets engine by two different teams. Company policy states the teams can not share the same secrets engine. What are two possible solutions?
+
+- [ ] Enable the secrets engine at a dedicated path for each team using the `-path` parameter
+- [ ]  Create a namespace for each of the teams and enable the secrets engine in the teams namespace
+- [ ]  Only one type of secrets engine can be enabled on a Vault cluster
+- [ ]  Deploy a second Vault cluster, one for each team
+- [ ]  Enable the secrets engine at the default path and create policies that limit what each team can list, read, and write
+
+<details>
+  <summary> Answer </summary>
+
+  Enable the secrets engine at a dedicated path for each team using the `-path` parameter
+  & Only the reference to the secrets is transmitted over the public network
+
+  [Refrence1](https://developer.hashicorp.com/vault/docs/commands/secrets/enable), [Refrence2](https://developer.hashicorp.com/vault/docs/enterprise/namespaces)
+
+</details>
+
+#### Q61: Where on the page would you click to display the list of available Vault-created encryption keys.
+![alt text](transit.png)
+
+
+<details>
+  <summary> Answer </summary>
+
+  transit/
+
+  [Refrence](https://developer.hashicorp.com/vault/api-docs/secret/transit#list-keys)
+
+</details>
+
+
