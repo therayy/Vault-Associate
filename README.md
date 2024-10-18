@@ -1114,3 +1114,61 @@ vault write transit/decrypt/password \
 </details>
 
 
+#### Q62: Which of these options does not allow the creation of a root token?
+- [ ] By using batch tokens
+- [ ] By using another root token
+- [ ] The initial root token generated at the vault operator init time
+- [ ] By using vault operator generate-root with the permission of a quorum of unseal key holders
+
+<details>
+  <summary> Answer </summary>
+
+  By using batch tokens
+
+</details>
+
+#### Q63: You manage two Vault dusters: “vaultduster1.acme.corp” and “vaultduster2.acme.corp”. You want to write a secret to the first Vaultcluster vaultcluster1.acme.corp and run vault kv put secret/foo value=‘bar’. The command times out and the error references the Vault cluster, “vaultcluster2.acme.corp”.You run the command again with the following address flag:`vault kv put -address=‘https://vaultcluster1.acme.corp’ secret/foo value=‘bar’`The command completes successfully. You find that the terminal session defines the environment variable `VAULT_ADDR=‘https://vaultcluster2.acxe.corp:8200’` Why was the second attempt successful?
+- [ ] Environment variables take precedence over flags
+- [ ] VAULT_CLUSTER_ADDR needs to be provided
+- [ ] Flags take precedence over environment variables
+- [ ] Vault listener is misconfigured
+
+<details>
+  <summary> Answer </summary>
+
+  By using batch tokens
+
+</details>
+
+#### Q64: The `alpha` secrets are stored in the team-based paths using this convention: `secret/<team_name>/alpha`. For example, `secret/team01/alpha` and `/secrets/team02/alpha`. Which Vault policy would not allow reading paths with the word `beta` in them, such as `secrets/team01/beta`?
+- [ ] 
+  ```yaml
+    path "secrets/*" {
+      capabilities = ["read"]
+    }
+  ```
+- [ ] 
+  ```yaml
+    path "secrets/+/alpha" {
+      capabailities = ["read"]
+    }
+  ```
+- [ ] 
+  ```yaml
+    path "alpha" {
+      capabilities = ["read"]
+    }
+  ```
+- [ ] None of the above
+
+<details>
+  <summary> Answer </summary>
+
+    ```yaml
+    path "alpha" {
+      capabilities = ["read"]
+    }
+    ```
+
+</details>
+
