@@ -812,9 +812,9 @@ Which payload.json file has the correct contents?
   <summary> Answer </summary>
 
   ```yaml
-   {
-     "ciphertext": "vault:v1:abcdefgh"
-   }
+  {
+    "plaintext": "dGh1IHF1aWNrIGJyb3duIGZveA=="
+  }
   ```
 
   This file should contain a field whose value is the Base64-encoded string of the data to be encrypted. In a given cURL command, the user is requesting that Vault's Transit secret engine encrypt data with the specified key, so the correct payload should contain only plaintext data so that the Transit secret engine can encrypt the operation. Option B contains the field and Base64-encoded data, which conforms to the request format expected by the Transit secret engine. plaintext
@@ -1532,4 +1532,100 @@ Which of the following commands should the DBA execute?
   <summary> Answer </summary>
     
   `vault lease revoke azuresql/creds/dba_access/2e5b1e0b-a081-c7el-5622-39f58e79a719`
+</details>
+
+#### Q92: One of the benefits of using the Vault transit secrets engine is its ability to easily rotate encryption keys. Which of these is true regarding key rotation?
+
+- [ ] Vault automatically rotates the encryption key based on a set period
+- [ ] Vault can rotate encryption keys, but cannot enforce restrictions about the minimum encryption key version
+- [ ] Vault does not maintain the versioned keyring
+- [ ] Encryption keys can be rotated manually by a user, or by an automated process which invokes the key rotation API
+<details>
+  <summary> Answer </summary>
+   
+  Encryption keys can be rotated manually by a user, or by an automated process which invokes the key rotation API
+
+</details>
+
+#### Q93: What is not a function provided by Vault’s transit secret engine?
+
+- [ ] Generating random bytes
+- [ ] Encrypting data
+- [ ] Storing ciphertext data
+- [ ] Verifying signed data
+- [ ] None of the above
+<details>
+  <summary> Answer </summary>
+   
+  Storing ciphertext data
+  
+</details>
+
+#### Q94: Which of the following storage backends supports high availability?
+
+- [ ] Azure Storage Container
+- [ ] Manta
+- [ ] Amazon S3
+- [ ] Consul
+<details>
+  <summary> Answer </summary>
+   
+  Consul
+  
+</details>
+
+#### Q95: Which command will generate a new transit key?
+
+- [ ]  `vault put transit/keys/my-key`
+- [ ]  `vault create -f transit/keys/my-key`
+- [ ]  `vault write -f transit/keys/my-key`
+- [ ]  `vault create transit/keys/my-key`
+<details>
+  <summary> Answer </summary>
+   
+   `vault write -f transit/keys/my-key`
+  
+</details>
+
+#### Q96: Which of the following is the correct option to authenticate to Vault using a token using the CLI?
+
+- [ ] A token can be used to authenticate to Vault through the API, not the CLI or the UI 
+- [ ] vault Login
+- [ ] vault <token>
+- [ ] A token cannot be used to authenitcate to Vault
+
+<details>
+  <summary> Answer </summary>
+   
+   vault login
+  
+</details>
+
+#### Q97: A child token must be assigned the same or a subset the parent token’s policies.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+   
+   True
+  
+</details>
+
+
+#### Q98: When enabling auto-unseal, how do you specify the seal type? (Choose two.)
+
+- [ ] Set the VAULT_SEAL_TYPE environment variable
+- [ ] Use the /sys/seal endpoint on the Vault API
+- [ ] Create a seal block in the server configuration file
+- [ ] Configure in the storage block of the server configuration file
+- [ ] Use the vault operator command
+
+<details>
+  <summary> Answer </summary>
+   Create a seal block in the server configuration file
+   Use the vault operator command
+   
+  
 </details>
