@@ -1317,3 +1317,42 @@ Which statement describes this AppRole auth method configuration?
   Generates batch tokens with TTL set to 5 minutes
 </details>
 
+#### Q76: What is a secret in the context of Vault?
+
+- [ ] HTTP session token that provides authorization to Vault
+- [ ] Threshold of keys required to unseal the Vault
+- [ ] Anything stored or returned that contains confidential material
+- [ ] Engine responsible for logging all requests and responses
+
+<details>
+  <summary> Answer </summary>
+  Anything stored or returned that contains confidential material
+</details>
+
+#### Q77: What methods of authentication does Vault support? (Choose four.)
+
+- [ ] JWT/OIDC
+- [ ] AppRole
+- [ ] GitHub
+- [ ] MMSQL
+- [ ] PostgreSQL
+- [ ] Nomad
+- [ ] LDAP
+
+<details>
+  <summary> Answer </summary>
+  JWT/OIDC
+  Approle 
+  GitHub
+  LDAP
+</details>
+
+#### Q78: Vault Agent allows client-side caching of tokens and leases. If the agent is shut down, those tokens and leases cached will be revoked.
+
+- [ ] True
+- [ ] False
+
+<details>
+  <summary> Answer </summary>
+   False 
+</details>
