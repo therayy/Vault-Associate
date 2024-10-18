@@ -1514,6 +1514,7 @@ Which statement describes this AppRole auth method configuration?
 
 #### Q91: You are managing a Vault implementation that has been integrated with Azure SQL database to provide dynamic credentials. You have created a role that will provide database credentials for database administrators (DBAs) to use for managing their database in Azure SQL. A DBA has requested a new credential by issuing the following Vault CLI command: `vault read azuresql/creds/dba_access`. The following output is returned:
 ![alt text](Images/leaseid.png)
+
 The DBA has completed their work and would like to proactively remove the credential now that their work is complete.
 Which of the following commands should the DBA execute?
 
