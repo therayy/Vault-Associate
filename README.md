@@ -1629,3 +1629,36 @@ Which of the following commands should the DBA execute?
    
   
 </details>
+
+#### Q99: After encrypting data using the Transit secrets engine, you've received the following output. Which of the following is true based on the output displayed below?
+
+  |  Key | Value |
+  | --- | --- |
+  | ciphertext | vault:v2:459f9zW6cg...... | 
+  ---
+
+- [ ] Similar to the KV secrets enginer, the transite secrets engine was enabled using `transit v2` option
+- [ ] The orignial encryption key has been rotated at least once
+- [ ] The data is stored in Vault using KV v2 secrets engine
+- [ ] This is the second version of the encrypted data
+
+<details>
+  <summary> Answer </summary>
+   The orignial encryption key has been rotated at least once
+   
+  
+</details>
+
+#### Q100: Which of the following is NOT a valid way in which a lease can be revoked in Vault?
+
+- [ ] Automatically when the TTL or Max-TTL expires
+- [ ] Using the API to call the `/v1/sys/leases` endpoint
+- [ ] Using the user interface (UI)
+- [ ] Via the CLI using the `vault token` command
+
+<details>
+  <summary> Answer </summary>
+   Using the API to call the `/v1/sys/leases` endpoint
+   
+  
+</details>
