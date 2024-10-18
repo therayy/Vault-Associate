@@ -1185,3 +1185,14 @@ vault write transit/decrypt/password \
   List the existing key names at the `secret/test` path
 
 </details>
+
+#### Q66: HOTSPOT - For the following statements, choose which secrets engine enables the use case. Each answer should only be used once.?
+![alt text](hotspot.png)
+
+<details>
+  <summary> Answer </summary>
+  
+  ![alt text](hotspotanswer.png)
+
+</details>
+
