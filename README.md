@@ -1430,3 +1430,38 @@ Which statement describes this AppRole auth method configuration?
   <summary> Answer </summary>
    Azure secrets engine
 </details>
+
+#### Q84: To create a non-root token with time-to-live (TTL) set to 30 minutes but with no max TTL which flag would you use?
+
+- [ ] -ttl=30n
+- [ ] -explicit-max-ttl=0
+- [ ] -orphan
+- [ ] None of the Above
+<details>
+  <summary> Answer </summary>
+   -ttl=30n
+</details>
+
+#### Q85: A user successfully logs into Vault with the following cURL command: `curl --request POST --data @payload.json http://127.0.0.1:8200/v1/auth/ldap/login/mitchellh` The response will include what information?
+
+- [ ] client_token and policies
+- [ ] access_key and policies
+- [ ] access_key and secrets available
+- [ ] client_token and secrets available
+<details>
+  <summary> Answer </summary>
+   client_token and policies
+</details>
+
+#### Q86: Which of the following statements are true about the default policy? (Choose two.)
+
+- [ ] It is one of the built-in policies
+- [ ] Provides a common set of permissions and is included on all tokens by default
+- [ ] Can not be modified or deleted
+- [ ] Gives a super admin permissions, similar to a root user on a Linux machine
+- [ ] Vault upgrade will overwrite any update you made to the default policy
+<details>
+  <summary> Answer </summary>
+   It is one of the built-in policies
+   Provides a common set of permissions and is included on all tokens by default
+</details>
