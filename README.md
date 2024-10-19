@@ -1430,18 +1430,18 @@ Which statement describes this AppRole auth method configuration?
 - [ ] Transit engine
 <details>
   <summary> Answer </summary>
-   Azure secrets engine
+   Key/Value secrets engine version 2
 </details>
 
 #### Q84: To create a non-root token with time-to-live (TTL) set to 30 minutes but with no max TTL which flag would you use?
 
-- [ ] -ttl=30n
+- [ ] -ttl=30m
 - [ ] -explicit-max-ttl=0
 - [ ] -orphan
 - [ ] None of the Above
 <details>
   <summary> Answer </summary>
-   -ttl=30n
+   -ttl=30m
 </details>
 
 #### Q85: A user successfully logs into Vault with the following cURL command: `curl --request POST --data @payload.json http://127.0.0.1:8200/v1/auth/ldap/login/mitchellh` The response will include what information?
