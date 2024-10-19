@@ -1066,10 +1066,7 @@ vault write transit/decrypt/password \
 </details>
 
 > #### Q59: Which of the following statements explains the benefit of response wrapping? Choose TWO correct answers.
-```bash
-vault write transit/decrypt/password \
-  ciphertext=vault:v1:8SDd3WHDOjf7mq69CyCqYjBXAiQQAVZRkFM13ok481zoCmHnSeDX9vyf7w==
-```
+
 - [ ] Limits the time of secret exposure by having a short-lived wrapping token
 - [ ] Allow versioning of the secrets
 - [ ] It protects Vault's root key (previously known as master key)
